@@ -1,0 +1,345 @@
+The system is: Windows - 10.0.22621 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler:  
+Build flags: 
+Id flags:  
+
+The output was:
+0
+MSBuild version 17.4.1+9a89d02ff for .NET Framework
+Build started 2/1/2023 12:48:40 PM.
+Project "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\3.25.2\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdC.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdC.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Programs\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\HostX86\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W0 /Gd /TC /analyze- /FC /errorReport:queue CMakeCCompilerId.c
+  CMakeCCompilerId.c
+Link:
+  C:\Programs\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
+  CompilerIdC.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\3.25.2\CompilerIdC\CompilerIdC.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_C_COMPILER=C:\Programs\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx86\x86\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdC.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate".
+Done Building Project "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\3.25.2\CompilerIdC\CompilerIdC.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.61
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+
+The C compiler identification is MSVC, found in "D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/3.25.2/CompilerIdC/CompilerIdC.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler:  
+Build flags: 
+Id flags:  
+
+The output was:
+0
+MSBuild version 17.4.1+9a89d02ff for .NET Framework
+Build started 2/1/2023 12:48:43 PM.
+Project "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\3.25.2\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdCXX.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdCXX.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Programs\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\HostX86\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W0 /Gd /TP /analyze- /FC /errorReport:queue CMakeCXXCompilerId.cpp
+  CMakeCXXCompilerId.cpp
+Link:
+  C:\Programs\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
+  CompilerIdCXX.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\3.25.2\CompilerIdCXX\CompilerIdCXX.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_CXX_COMPILER=C:\Programs\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx86\x86\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdCXX.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate".
+Done Building Project "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\3.25.2\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.72
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+
+The CXX compiler identification is MSVC, found in "D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/3.25.2/CompilerIdCXX/CompilerIdCXX.exe"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-5vj0rg
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_505ac.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CMakeCCompilerABI.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_505ac.dir\Debug\\" /Fd"cmTC_505ac.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Programs\CMake\share\cmake-3.25\Modules\CMakeCCompilerABI.c"
+  cmTC_505ac.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-5vj0rg\Debug\cmTC_505ac.exe
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-lk2b21
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_3757e.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CMakeCXXCompilerABI.cpp
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3757e.dir\Debug\\" /Fd"cmTC_3757e.dir\Debug\vc143.pdb" /external:W1 /Gd /TP /analyze- /errorReport:queue "D:\Programs\CMake\share\cmake-3.25\Modules\CMakeCXXCompilerABI.cpp"
+  cmTC_3757e.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-lk2b21\Debug\cmTC_3757e.exe
+
+
+
+Determining if the AFTR_CONFIG_USE_FREE_TYPE exist passed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-hdw4b0
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_f9ba3.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_f9ba3.dir\Debug\\" /Fd"cmTC_f9ba3.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-hdw4b0\CheckSymbolExists.c"
+  cmTC_f9ba3.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-hdw4b0\Debug\cmTC_f9ba3.exe
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_FREE_TYPE
+  return ((int*)(&AFTR_CONFIG_USE_FREE_TYPE))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_FREE_TYPE_GL_FONTS exist passed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-l7szuk
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_604a7.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_604a7.dir\Debug\\" /Fd"cmTC_604a7.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-l7szuk\CheckSymbolExists.c"
+  cmTC_604a7.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-l7szuk\Debug\cmTC_604a7.exe
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_FREE_TYPE_GL_FONTS
+  return ((int*)(&AFTR_CONFIG_USE_FREE_TYPE_GL_FONTS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_GDAL exist passed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-7ja21m
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_12d2b.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_12d2b.dir\Debug\\" /Fd"cmTC_12d2b.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-7ja21m\CheckSymbolExists.c"
+  cmTC_12d2b.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-7ja21m\Debug\cmTC_12d2b.exe
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_GDAL
+  return ((int*)(&AFTR_CONFIG_USE_GDAL))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_ASSIMP exist passed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-z9xxut
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_5c59a.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5c59a.dir\Debug\\" /Fd"cmTC_5c59a.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-z9xxut\CheckSymbolExists.c"
+  cmTC_5c59a.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-z9xxut\Debug\cmTC_5c59a.exe
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_ASSIMP
+  return ((int*)(&AFTR_CONFIG_USE_ASSIMP))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_IMGUI exist passed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-vh8d4e
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_31ec8.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_31ec8.dir\Debug\\" /Fd"cmTC_31ec8.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-vh8d4e\CheckSymbolExists.c"
+  cmTC_31ec8.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-vh8d4e\Debug\cmTC_31ec8.exe
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_IMGUI
+  return ((int*)(&AFTR_CONFIG_USE_IMGUI))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_OGL_GLEW exist passed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-ko5cq9
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_5e860.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  CheckSymbolExists.c
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5e860.dir\Debug\\" /Fd"cmTC_5e860.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-ko5cq9\CheckSymbolExists.c"
+  cmTC_5e860.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-ko5cq9\Debug\cmTC_5e860.exe
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_OGL_GLEW
+  return ((int*)(&AFTR_CONFIG_USE_OGL_GLEW))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_FMT_LIB exist passed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-8xyry4
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_9a883.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9a883.dir\Debug\\" /Fd"cmTC_9a883.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-8xyry4\CheckSymbolExists.c"
+  cmTC_9a883.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-8xyry4\Debug\cmTC_9a883.exe
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_FMT_LIB
+  return ((int*)(&AFTR_CONFIG_USE_FMT_LIB))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_EIGEN_V3 exist passed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-mi1xyd
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_cdf86.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  CheckSymbolExists.c
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cdf86.dir\Debug\\" /Fd"cmTC_cdf86.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-mi1xyd\CheckSymbolExists.c"
+  cmTC_cdf86.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-mi1xyd\Debug\cmTC_cdf86.exe
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_EIGEN_V3
+  return ((int*)(&AFTR_CONFIG_USE_EIGEN_V3))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_BOOST exist passed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-e7s6hn
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_9453a.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9453a.dir\Debug\\" /Fd"cmTC_9453a.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-e7s6hn\CheckSymbolExists.c"
+  cmTC_9453a.vcxproj -> D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-e7s6hn\Debug\cmTC_9453a.exe
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_BOOST
+  return ((int*)(&AFTR_CONFIG_USE_BOOST))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+

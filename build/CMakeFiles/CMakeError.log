@@ -1,0 +1,234 @@
+Determining if the AFTR_CONFIG_USE_FONTS exist failed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-duhe7h
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_b78e7.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_b78e7.dir\Debug\\" /Fd"cmTC_b78e7.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-duhe7h\CheckSymbolExists.c"
+D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-duhe7h\CheckSymbolExists.c(8,40): error C2065: 'AFTR_CONFIG_USE_FONTS': undeclared identifier [D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-duhe7h\cmTC_b78e7.vcxproj]
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_FONTS
+  return ((int*)(&AFTR_CONFIG_USE_FONTS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_OCULUS_RIFT_OVR exist failed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-k56id2
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_c084e.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c084e.dir\Debug\\" /Fd"cmTC_c084e.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-k56id2\CheckSymbolExists.c"
+D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-k56id2\CheckSymbolExists.c(8,50): error C2065: 'AFTR_CONFIG_USE_OCULUS_RIFT_OVR': undeclared identifier [D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-k56id2\cmTC_c084e.vcxproj]
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_OCULUS_RIFT_OVR
+  return ((int*)(&AFTR_CONFIG_USE_OCULUS_RIFT_OVR))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_OCULUS_RIFT_DK2 exist failed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-11dx23
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_13a38.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_13a38.dir\Debug\\" /Fd"cmTC_13a38.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-11dx23\CheckSymbolExists.c"
+D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-11dx23\CheckSymbolExists.c(8,50): error C2065: 'AFTR_CONFIG_USE_OCULUS_RIFT_DK2': undeclared identifier [D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-11dx23\cmTC_13a38.vcxproj]
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_OCULUS_RIFT_DK2
+  return ((int*)(&AFTR_CONFIG_USE_OCULUS_RIFT_DK2))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_KEYLOK_DONGLE exist failed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-i2574i
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_d678c.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  CheckSymbolExists.c
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d678c.dir\Debug\\" /Fd"cmTC_d678c.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-i2574i\CheckSymbolExists.c"
+D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-i2574i\CheckSymbolExists.c(8,48): error C2065: 'AFTR_CONFIG_USE_KEYLOK_DONGLE': undeclared identifier [D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-i2574i\cmTC_d678c.vcxproj]
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_KEYLOK_DONGLE
+  return ((int*)(&AFTR_CONFIG_USE_KEYLOK_DONGLE))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_3DS exist failed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-kxnpsh
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_b10b7.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_b10b7.dir\Debug\\" /Fd"cmTC_b10b7.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-kxnpsh\CheckSymbolExists.c"
+D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-kxnpsh\CheckSymbolExists.c(8,38): error C2065: 'AFTR_CONFIG_USE_3DS': undeclared identifier [D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-kxnpsh\cmTC_b10b7.vcxproj]
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_3DS
+  return ((int*)(&AFTR_CONFIG_USE_3DS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_RANGE_V3_LIB exist failed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-6gxnc4
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_798a0.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  CheckSymbolExists.c
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_798a0.dir\Debug\\" /Fd"cmTC_798a0.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-6gxnc4\CheckSymbolExists.c"
+D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-6gxnc4\CheckSymbolExists.c(8,47): error C2065: 'AFTR_CONFIG_USE_RANGE_V3_LIB': undeclared identifier [D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-6gxnc4\cmTC_798a0.vcxproj]
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_RANGE_V3_LIB
+  return ((int*)(&AFTR_CONFIG_USE_RANGE_V3_LIB))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_GTEST_LIB exist failed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-wqnpc3
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_33c33.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  CheckSymbolExists.c
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_33c33.dir\Debug\\" /Fd"cmTC_33c33.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-wqnpc3\CheckSymbolExists.c"
+D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-wqnpc3\CheckSymbolExists.c(8,44): error C2065: 'AFTR_CONFIG_USE_GTEST_LIB': undeclared identifier [D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-wqnpc3\cmTC_33c33.vcxproj]
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_GTEST_LIB
+  return ((int*)(&AFTR_CONFIG_USE_GTEST_LIB))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_CAL3D exist failed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-rdl4xr
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_fefb8.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  CheckSymbolExists.c
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_fefb8.dir\Debug\\" /Fd"cmTC_fefb8.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-rdl4xr\CheckSymbolExists.c"
+D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-rdl4xr\CheckSymbolExists.c(8,40): error C2065: 'AFTR_CONFIG_USE_CAL3D': undeclared identifier [D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-rdl4xr\cmTC_fefb8.vcxproj]
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_CAL3D
+  return ((int*)(&AFTR_CONFIG_USE_CAL3D))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the AFTR_CONFIG_USE_ODE exist failed with the following output:
+Change Dir: D:/Projects/repos/aburn/usr/modules/NewModule/build/CMakeFiles/CMakeScratch/TryCompile-0lynsa
+
+Run Build Command(s):C:/Programs/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_30508.vcxproj /p:Configuration=Debug /p:Platform=win32 /p:VisualStudioVersion=17.0 /v:m && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.34.31937 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  CheckSymbolExists.c
+  cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_30508.dir\Debug\\" /Fd"cmTC_30508.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-0lynsa\CheckSymbolExists.c"
+D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-0lynsa\CheckSymbolExists.c(8,38): error C2065: 'AFTR_CONFIG_USE_ODE': undeclared identifier [D:\Projects\repos\aburn\usr\modules\NewModule\build\CMakeFiles\CMakeScratch\TryCompile-0lynsa\cmTC_30508.vcxproj]
+
+
+File CheckSymbolExists.c:
+/* */
+#include <D:/Projects/repos/aburn/usr/include/aftr/AftrConfig.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef AFTR_CONFIG_USE_ODE
+  return ((int*)(&AFTR_CONFIG_USE_ODE))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
