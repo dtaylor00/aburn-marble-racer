@@ -28,6 +28,8 @@ class GLViewMarbleRacer : public GLView {
     virtual void updateWorld();  ///< Called once per frame
     virtual void loadMap();      ///< Called once at startup to build this module's scene
 
+    virtual void onKeyDown(const SDL_KeyboardEvent &key);
+
    protected:
     GLViewMarbleRacer(const std::vector<std::string> &args);
     virtual void onCreate();

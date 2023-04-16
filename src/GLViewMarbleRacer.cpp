@@ -7,18 +7,20 @@
 #include "GuiMenuSkyBox.h"
 #include "GuiMenuTransform.h"
 #include "MGLSkyBox.h"
+#include "ManagerPhysics.h"
+#include "PxPhysicsAPI.h"
 #include "WO.h"
 #include "WOImGuiMain.h"
 #include "WOLight.h"
+#include "WOPhysics.h"
+#include "WOPhysicsMarble.h"
+#include "WOPhysicsTriangleMesh.h"
 #include "WOSkyBox.h"
 #include "WorldList.h"
 
 using namespace Aftr;
-WO *cctvCamera;
-WO *box1;
-WO *box2;
-WO *box3;
-WO *box4;
+
+bool paused = true;
 
 GLViewMarbleRacer *GLViewMarbleRacer::New(
     const std::vector<std::string> &args) {
@@ -39,20 +41,10 @@ GLViewMarbleRacer::~GLViewMarbleRacer() {}
 void GLViewMarbleRacer::updateWorld() {
     GLView::updateWorld();
 
-    box1->rotateAboutGlobalX(0.02f);
-    box2->rotateAboutRelX(0.02f);
-
-    Vector pos = box3->getPosition();
-    if (pos.x > 20) pos.x = 0;
-    pos += Vector(0.2, 0, 0);
-    box3->setPosition(pos);
-
-    Vector pos2 = box4->getPosition();
-    if (pos2.x > 20 || pos2.x < -20) pos2.x = 0;
-    if (pos2.y > 20 || pos2.y < -20) pos2.y = 0;
-    if (pos2.z > 20 || pos2.z < -20) pos2.z = 0;
-    pos2 += box4->getDisplayMatrix() * Vector(0.2, 0, 0);
-    box4->setPosition(pos2);
+    if (!paused) {
+        ManagerPhysics::simulate(1.f / 60.f);
+        ManagerPhysics::syncWOsFromPhysics();
+    }
 
     maingui->onUpdateWO();  // doesn't get called in updateWorld because it's an ImGui instance
 }
@@ -64,6 +56,12 @@ void Aftr::GLViewMarbleRacer::loadMap() {
     this->cam->setPosition(40, 50, 35);
     this->cam->rotateAboutRelZ(-120 * DEGtoRAD);
     this->cam->rotateAboutRelY(30 * DEGtoRAD);
+
+    // Initialize ManagerPhysics
+    {
+        ManagerPhysics::init(20.f, Vector(0, 0, -1));
+        std::cout << "Initialized ManagerPhysics...\n";
+    }
 
     // Sets OpenGL state variables
     {
@@ -147,7 +145,9 @@ void Aftr::GLViewMarbleRacer::loadMap() {
     // Create the grass plane
     {
         std::string grass(ManagerEnvironmentConfiguration::getSMM() + "/models/grassFloor400x400_pp.wrl");
-        WO *wo = WO::New(grass, Vector(1, 1, 1), MESH_SHADING_TYPE::mstFLAT);
+        PxMaterial *mat = ManagerPhysics::getPhysics()->createMaterial(0.5f, 0.5f, 0.4f);
+        PxRigidStatic *plane = PxCreatePlane(*ManagerPhysics::getPhysics(), PxPlane(0, 0, 1, 0), *mat);
+        WO *wo = WOPhysics::New(plane, grass, Vector(1, 1, 1), MESH_SHADING_TYPE::mstFLAT);
         wo->setPosition(Vector(0, 0, 0));
         wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
         wo->upon_async_model_loaded([wo]() {
@@ -162,38 +162,50 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         worldLst->push_back(wo);
     }
 
+    // Create a few marbles
+    {
+        WOPhysicsMarble *wo = WOPhysicsMarble::New();
+        wo->setLabel("marble");
+        wo->setPosition(5, 5, 5);
+        worldLst->push_back(wo);
+    }
+
+    // Creating test tracks
+    {
+        std::string track(ManagerEnvironmentConfiguration::getLMM() + "/models/track.dae");
+        WOPhysicsTriangleMesh *wo = WOPhysicsTriangleMesh::New(track);
+        wo->setLabel("track");
+        // wo->setPosition(-5, -5, 20);
+        worldLst->push_back(wo);
+
+        std::string curvedtrack(ManagerEnvironmentConfiguration::getLMM() + "/models/curvedtrack.dae");
+        WOPhysicsTriangleMesh *wo2 = WOPhysicsTriangleMesh::New(curvedtrack);
+        wo2->setLabel("curved track");
+        // // wo->setPosition(-5, -5, 20);
+        worldLst->push_back(wo2);
+    }
+
     // Create a test objects
     {
-        std::string camPath(ManagerEnvironmentConfiguration::getLMM() + "/models/cctv_camera.x3d");
-        cctvCamera = WO::New(camPath, Vector(10.f, 10.f, 10.f), MESH_SHADING_TYPE::mstAUTO);
-        cctvCamera->setPosition(Vector(10.f, 10.f, 20.f));
-        cctvCamera->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
-        cctvCamera->setLabel("CCTV Camera");
-        worldLst->push_back(cctvCamera);
+        PxPhysics *px = ManagerPhysics::getPhysics();
+        PxScene *scene = ManagerPhysics::getScene();
+        PxMaterial *mat = ManagerPhysics::getDefaultMaterial();
 
-        std::string boxPath(ManagerEnvironmentConfiguration::getSMM() + "/models/cube4x4x4redShinyPlastic_pp.wrl");
-        box1 = WO::New(boxPath, Vector(1.f, 1.f, 1.f), MESH_SHADING_TYPE::mstAUTO);
-        box1->setPosition(Vector(5.f, 5.f, 10.f));
-        box1->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
-        box1->setLabel("Box 1 (Global Rotation)");
-        worldLst->push_back(box1);
+        std::string box(ManagerEnvironmentConfiguration::getSMM() + "/models/cube4x4x4redShinyPlastic_pp.wrl");
+        PxBoxGeometry geom(2.f, 2.f, 2.f);
+        PxShape *shape = px->createShape(geom, *mat, true);
+        PxTransform t({0, 0, 0});
 
-        box2 = WO::New(boxPath, Vector(1.f, 1.f, 1.f), MESH_SHADING_TYPE::mstAUTO);
-        box2->setPosition(Vector(-5.f, 5.f, 10.f));
-        box2->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
-        box2->setLabel("Box 2 (Relative Rotation)");
-        worldLst->push_back(box2);
-
-        box3 = WO::New(boxPath, Vector(1.f, 1.f, 1.f), MESH_SHADING_TYPE::mstAUTO);
-        box3->setPosition(Vector(5.f, -5.f, 10.f));
-        box3->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
-        box3->setLabel("Box 3 (Global Position)");
-        worldLst->push_back(box3);
-
-        box4 = WO::New(boxPath, Vector(1.f, 1.f, 1.f), MESH_SHADING_TYPE::mstAUTO);
-        box4->setPosition(Vector(-5.f, -5.f, 10.f));
-        box4->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
-        box4->setLabel("Box 4 (Relative Position)");
-        worldLst->push_back(box4);
+        PxRigidDynamic *body = px->createRigidDynamic(t);
+        body->attachShape(*shape);
+        WOPhysics *wo = WOPhysics::New(body, box, Vector(1, 1, 1), MESH_SHADING_TYPE::mstFLAT);
+        wo->setLabel("box");
+        wo->setPosition(10, 10, 20);
+        worldLst->push_back(wo);
     }
+}
+
+void GLViewMarbleRacer::onKeyDown(const SDL_KeyboardEvent &key) {
+    GLView::onKeyDown(key);
+    if (key.keysym.sym == SDLK_SPACE) paused = !paused;
 }
