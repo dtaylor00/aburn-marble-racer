@@ -1,6 +1,7 @@
 #include "GLViewMarbleRacer.h"
 
 #include "AftrGLRendererBase.h"
+#include "AftrImGuiIncludes.h"
 #include "Axes.h"
 #include "Camera.h"
 #include "GuiMenuLight.h"
@@ -42,7 +43,8 @@ void GLViewMarbleRacer::updateWorld() {
     GLView::updateWorld();
 
     if (!paused) {
-        ManagerPhysics::simulate(1.f / 60.f);
+        // ManagerPhysics::simulate(1.f / 60.f);
+        ManagerPhysics::simulate(2.f / ImGui::GetIO().Framerate);  // NOTE: Probably is a better way to get current fps
         ManagerPhysics::syncWOsFromPhysics();
     }
 
@@ -59,7 +61,7 @@ void Aftr::GLViewMarbleRacer::loadMap() {
 
     // Initialize ManagerPhysics
     {
-        ManagerPhysics::init(20.f, Vector(0, 0, -1));
+        ManagerPhysics::init(25.f, Vector(0, 0, -1));
         std::cout << "Initialized ManagerPhysics...\n";
     }
 
@@ -142,67 +144,159 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         maingui->addMenu(menu);
     }
 
-    // Create the grass plane
-    {
-        std::string grass(ManagerEnvironmentConfiguration::getSMM() + "/models/grassFloor400x400_pp.wrl");
-        PxMaterial *mat = ManagerPhysics::getPhysics()->createMaterial(0.5f, 0.5f, 0.4f);
-        PxRigidStatic *plane = PxCreatePlane(*ManagerPhysics::getPhysics(), PxPlane(0, 0, 1, 0), *mat);
-        WO *wo = WOPhysics::New(plane, grass, Vector(1, 1, 1), MESH_SHADING_TYPE::mstFLAT);
-        wo->setPosition(Vector(0, 0, 0));
-        wo->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
-        wo->upon_async_model_loaded([wo]() {
-            ModelMeshSkin &grassSkin = wo->getModel()->getModelDataShared()->getModelMeshes().at(0)->getSkins().at(0);
-            grassSkin.getMultiTextureSet().at(0).setTexRepeats(5.0f);
-            grassSkin.setAmbient(aftrColor4f(0.4f, 0.4f, 0.4f, 1.0f));   // Color of object when it is not in any light
-            grassSkin.setDiffuse(aftrColor4f(1.0f, 1.0f, 1.0f, 1.0f));   // Diffuse color components (ie, matte shading color of this object)
-            grassSkin.setSpecular(aftrColor4f(0.4f, 0.4f, 0.4f, 1.0f));  // Specular color component (ie, how "shiney" it is)
-            grassSkin.setSpecularCoefficient(10);                        // How "sharp" are the specular highlights (bigger is sharper, 1000 is very sharp, 10 is very dull)
-        });
-        wo->setLabel("Grass");
-        worldLst->push_back(wo);
-    }
-
     // Create a few marbles
     {
-        WOPhysicsMarble *wo = WOPhysicsMarble::New();
-        wo->setLabel("marble");
-        wo->setPosition(5, 5, 5);
-        worldLst->push_back(wo);
+        WOPhysicsMarble *wo;
+
+        for (size_t i = 0; i < 15; i++) {
+            // TODO: replace std:rand with a better rng
+            int randx = (std::rand() % 6 - 3);  // number between -3 and 3
+            int randy = (std::rand() % 6 - 3);  // number between -3 and 3
+            randx = randx > 0 ? randx + 5 : randx - 5;
+            randy = randy > 0 ? randy + 5 : randy - 5;
+            std::string label = std::format("marble{:02d}", i);
+
+            wo = WOPhysicsMarble::New();
+            wo->setLabel(label);
+            wo->setPosition(randx, randy, 60);
+            worldLst->push_back(wo);
+        }
+
+        // wo = WOPhysicsMarble::New();
+        // wo->setLabel("marble00");
+        // wo->setPosition(10, 0, 60);
+        // worldLst->push_back(wo);
+
+        // wo = WOPhysicsMarble::New();
+        // wo->setLabel("marble01");
+        // wo->setPosition(0, 10, 60);
+        // worldLst->push_back(wo);
+
+        // wo = WOPhysicsMarble::New();
+        // wo->setLabel("marble02");
+        // wo->setPosition(0, -10, 60);
+        // worldLst->push_back(wo);
+
+        // wo = WOPhysicsMarble::New();
+        // wo->setLabel("marble03");
+        // wo->setPosition(10, 0, 60);
+        // worldLst->push_back(wo);
+
+        // wo = WOPhysicsMarble::New();
+        // wo->setLabel("marble04");
+        // wo->setPosition(0, -10.1, 60);
+        // worldLst->push_back(wo);
     }
 
     // Creating test tracks
     {
-        std::string track(ManagerEnvironmentConfiguration::getLMM() + "/models/track.dae");
-        WOPhysicsTriangleMesh *wo = WOPhysicsTriangleMesh::New(track);
-        wo->setLabel("track");
-        // wo->setPosition(-5, -5, 20);
+        std::string straighttrack(ManagerEnvironmentConfiguration::getLMM() + "/models/straighttrack.dae");
+        std::string curvedtrack(ManagerEnvironmentConfiguration::getLMM() + "/models/curvedtrack.dae");
+        std::string funneltrack(ManagerEnvironmentConfiguration::getLMM() + "/models/funneltrack.dae");
+        std::string boxtrack(ManagerEnvironmentConfiguration::getLMM() + "/models/boxtrack.dae");
+        WOPhysicsTriangleMesh *wo;
+        Mat4 pose;
+
+        wo = WOPhysicsTriangleMesh::New(funneltrack);
+        wo->setLabel("track00");
+        pose.setX(Vector(1, 0, 0));
+        pose.setY(Vector(0, 1, 0));
+        pose.setZ(Vector(0, 0, 1));
+        pose.setPosition(Vector(0, 0, 55));
+        wo->setPose(pose);
         worldLst->push_back(wo);
 
-        std::string curvedtrack(ManagerEnvironmentConfiguration::getLMM() + "/models/curvedtrack.dae");
-        WOPhysicsTriangleMesh *wo2 = WOPhysicsTriangleMesh::New(curvedtrack);
-        wo2->setLabel("curved track");
-        // // wo->setPosition(-5, -5, 20);
-        worldLst->push_back(wo2);
+        wo = WOPhysicsTriangleMesh::New(straighttrack);
+        wo->setLabel("track01");
+        pose.setX(Vector(0.97, 0, 0.26));
+        pose.setY(Vector(0, 1, 0));
+        pose.setZ(Vector(-0.26, 0, 0.97));
+        pose.setPosition(Vector(0, 0, 42.5));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsTriangleMesh::New(curvedtrack);
+        wo->setLabel("track02");
+        pose.setX(Vector(0, -1, 0));
+        pose.setY(Vector(1, 0, 0));
+        pose.setZ(Vector(0, 0, 1));
+        pose.setPosition(Vector(-25, 6.5, 40));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsTriangleMesh::New(straighttrack, Vector(4, 1, 1));
+        wo->setLabel("track03");
+        pose.setX(Vector(0, 0.98, -0.17));
+        pose.setY(Vector(-1, 0, 0));
+        pose.setZ(Vector(0, 0.17, 0.98));
+        pose.setPosition(Vector(-33.5, 59, 33));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsTriangleMesh::New(curvedtrack);
+        wo->setLabel("track04");
+        pose.setX(Vector(-1, 0, 0));
+        pose.setY(Vector(0, -1, 0));
+        pose.setZ(Vector(0, 0, 1));
+        pose.setPosition(Vector(-27, 112.5, 26.25));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsTriangleMesh::New(curvedtrack);
+        wo->setLabel("track05");
+        pose.setX(Vector(0, 1, 0));
+        pose.setY(Vector(-1, 0, 0));
+        pose.setZ(Vector(0, 0, 1));
+        pose.setPosition(Vector(2, 114.5, 26.25));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsTriangleMesh::New(straighttrack, Vector(2, 1, 1));
+        wo->setLabel("track06");
+        pose.setX(Vector(0, 0.87, 0.5));
+        pose.setY(Vector(-1, 0, 0));
+        pose.setZ(Vector(0, -0.5, 0.87));
+        pose.setPosition(Vector(10.5, 83, 16));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsTriangleMesh::New(straighttrack, Vector(3, 1, 1));
+        wo->setLabel("track07");
+        pose.setX(Vector(0, 0.97, 0.26));
+        pose.setY(Vector(-1, 0, 0));
+        pose.setZ(Vector(0, -0.26, 0.97));
+        pose.setPosition(Vector(10.5, 37.5, -1.5));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsTriangleMesh::New(boxtrack, Vector(1, 1, 1));
+        wo->setLabel("track08");
+        pose.setX(Vector(1, 0, 0));
+        pose.setY(Vector(0, 1, 0));
+        pose.setZ(Vector(0, 0, 1));
+        pose.setPosition(Vector(10.5, -8, -20));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
     }
 
     // Create a test objects
-    {
-        PxPhysics *px = ManagerPhysics::getPhysics();
-        PxScene *scene = ManagerPhysics::getScene();
-        PxMaterial *mat = ManagerPhysics::getDefaultMaterial();
+    // {
+    //     PxPhysics *px = ManagerPhysics::getPhysics();
+    //     PxScene *scene = ManagerPhysics::getScene();
+    //     PxMaterial *mat = ManagerPhysics::getDefaultMaterial();
 
-        std::string box(ManagerEnvironmentConfiguration::getSMM() + "/models/cube4x4x4redShinyPlastic_pp.wrl");
-        PxBoxGeometry geom(2.f, 2.f, 2.f);
-        PxShape *shape = px->createShape(geom, *mat, true);
-        PxTransform t({0, 0, 0});
+    //     std::string box(ManagerEnvironmentConfiguration::getSMM() + "/models/cube4x4x4redShinyPlastic_pp.wrl");
+    //     PxBoxGeometry geom(2.f, 2.f, 2.f);
+    //     PxShape *shape = px->createShape(geom, *mat, true);
+    //     PxTransform t({0, 0, 0});
 
-        PxRigidDynamic *body = px->createRigidDynamic(t);
-        body->attachShape(*shape);
-        WOPhysics *wo = WOPhysics::New(body, box, Vector(1, 1, 1), MESH_SHADING_TYPE::mstFLAT);
-        wo->setLabel("box");
-        wo->setPosition(10, 10, 20);
-        worldLst->push_back(wo);
-    }
+    //     PxRigidDynamic *body = px->createRigidDynamic(t);
+    //     body->attachShape(*shape);
+    //     WOPhysics *wo = WOPhysics::New(body, box, Vector(1, 1, 1), MESH_SHADING_TYPE::mstFLAT);
+    //     wo->setLabel("box");
+    //     wo->setPosition(10, 10, 20);
+    //     worldLst->push_back(wo);
+    // }
 }
 
 void GLViewMarbleRacer::onKeyDown(const SDL_KeyboardEvent &key) {

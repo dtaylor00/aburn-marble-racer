@@ -22,15 +22,15 @@ void WOPhysicsMarble::onCreate(Vector scale, MESH_SHADING_TYPE shadingType) {
 
     PxPhysics *px = ManagerPhysics::getPhysics();
     PxScene *scene = ManagerPhysics::getScene();
-    PxMaterial *mat = ManagerPhysics::getDefaultMaterial();
+    // PxMaterial *mat = ManagerPhysics::getDefaultMaterial();
+    PxMaterial *mat = px->createMaterial(0.5f, 0.5f, 0.05f);
 
     PxSphereGeometry geom(1.f);
     PxShape *shape = px->createShape(geom, *mat, true);
-    PxTransform t({0, 0, 0});
-
-    PxRigidDynamic *body = px->createRigidDynamic(t);
+    PxRigidDynamic *body = px->createRigidDynamic(PxTransform(0, 0, 0));
+    body->setAngularDamping(0);
+    body->setLinearDamping(0);
     body->attachShape(*shape);
 
-    // this->onCreatePhysics(body);
-    WOPhysicsAbstract::onCreatePhysics(body);
+    this->onCreatePhysics(body);
 }

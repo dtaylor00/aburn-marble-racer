@@ -29,13 +29,13 @@ GuiMenuTransform::GuiMenuTransform()
       relativePosition(false),
       convertRotation(true),
       convertPosition(true),
-      lockRotation(true),
-      lockPosition(true),
+      lockRotation(false),
+      lockPosition(false),
       disableYaw(false),
       disableYawPitch(false),
       disableDcmTable(false),
-      minPosSlider(-20),
-      maxPosSlider(20) {}
+      minPosSlider(-100),
+      maxPosSlider(100) {}
 
 void GuiMenuTransform::onCreate(WorldContainer *worldLst) {
     this->worldLst = worldLst;

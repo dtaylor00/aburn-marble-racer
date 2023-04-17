@@ -20,30 +20,6 @@ WOPhysicsTriangleMesh *WOPhysicsTriangleMesh::New(const std::string &modelFileNa
 void WOPhysicsTriangleMesh::onCreate(const std::string &modelFileName, Vector scale, MESH_SHADING_TYPE shadingType) {
     WO::onCreate(modelFileName, scale, shadingType);
     this->upon_async_model_loaded([this] {
-        // std::vector<Vector> vertLst = model->getCompositeVertexList();
-        // PxU32 nbVerts = vertLst.size();
-        // PxVec3 *verts = new PxVec3[nbVerts];
-        // for (size_t i = 0; i < nbVerts; i++) {
-        //     Vector v = vertLst.at(i);
-        //     verts[i] = PxVec3(v.x, v.y, v.z);
-        // }
-
-        // std::vector<unsigned int> idxLst = model->getCompositeIndexList();
-        // PxU32 nbIndices = idxLst.size();
-        // PxU32 *indices32 = new PxU32[nbIndices];
-        // for (size_t i = 0; i < nbIndices; i++) {
-        //     unsigned int idx = idxLst.at(i);
-        //     indices32[i] = PxU32(idx);
-        // }
-
-        // PxTriangleMeshDesc meshDesc;
-        // meshDesc.points.count = nbVerts;
-        // meshDesc.points.data = verts;
-        // meshDesc.points.stride = sizeof(PxVec3);
-        // meshDesc.triangles.count = nbIndices / 3;
-        // meshDesc.triangles.data = indices32;
-        // meshDesc.triangles.stride = 3 * sizeof(PxU32);
-
         PxPhysics *px = ManagerPhysics::getPhysics();
         PxScene *scene = ManagerPhysics::getScene();
         PxMaterial *mat = ManagerPhysics::getDefaultMaterial();

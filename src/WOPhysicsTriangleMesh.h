@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IFaceWOPhysics.h"
-#include "PxActor.h"
 #include "WOPhysicsAbstract.h"
 
 namespace Aftr {
