@@ -288,8 +288,3 @@ void Aftr::GLViewMarbleRacer::loadMap() {
     //     worldLst->push_back(wo);
     // }
 }
-
-void GLViewMarbleRacer::onKeyDown(const SDL_KeyboardEvent &key) {
-    GLView::onKeyDown(key);
-    if (key.keysym.sym == SDLK_SPACE) paused = !paused;
-}
