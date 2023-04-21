@@ -7,6 +7,7 @@
 using namespace physx;
 
 namespace Aftr {
+class Model;
 
 class ManagerPhysics {
    public:
@@ -15,6 +16,8 @@ class ManagerPhysics {
 
     static void simulate(float seconds);
     static void syncWOsFromPhysics();
+
+    static PxShape* createShapeFromModel(const Model* model, bool isExclusive = false);
 
     static PxPhysics* getPhysics() { return ManagerPhysics::px; }
     static PxFoundation* getFoundation() { return ManagerPhysics::pf; }

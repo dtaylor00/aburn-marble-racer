@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "IFaceWOPhysics.h"
+#include "Model.h"
 #include "PxConfig.h"
 #include "PxPhysicsAPI.h"
 #include "Vector.h"
@@ -108,4 +109,33 @@ void ManagerPhysics::syncWOsFromPhysics() {
         if (iface != NULL)
             iface->updatePoseFromPhysics();
     }
+}
+
+PxShape* ManagerPhysics::createShapeFromModel(const Model* model, bool isExclusive) {
+    if (model->getModelDataShared() == nullptr) return nullptr;
+
+    PxCookingParams params(px->getTolerancesScale());
+    params.midphaseDesc.setToDefault(PxMeshMidPhase::eBVH34);
+    params.meshPreprocessParams |= PxMeshPreprocessingFlag::eDISABLE_ACTIVE_EDGES_PRECOMPUTE;
+    params.meshPreprocessParams |= PxMeshPreprocessingFlag::eDISABLE_CLEAN_MESH;
+    params.meshPreprocessParams |= PxMeshPreprocessingFlag::eENABLE_INERTIA;
+    params.meshWeldTolerance = 1e-7f;
+
+    const std::vector<Vector>& verts = model->getCompositeVertexList();
+    const std::vector<unsigned int>& indices = model->getCompositeIndexList();
+    PxTriangleMeshDesc meshDesc;
+    meshDesc.points.count = verts.size();
+    meshDesc.points.data = verts.data();
+    meshDesc.points.stride = sizeof(Vector);
+    meshDesc.triangles.count = indices.size() / 3;
+    meshDesc.triangles.data = indices.data();
+    meshDesc.triangles.stride = 3 * sizeof(unsigned int);
+
+    // bool res = PxValidateTriangleMesh(params, meshDesc);
+    // PX_ASSERT(res);
+
+    PxTriangleMesh* mesh = PxCreateTriangleMesh(params, meshDesc, px->getPhysicsInsertionCallback());
+    PxTriangleMeshGeometry geom(mesh, PxMeshScale());
+    PxShape* shape = px->createShape(geom, *mat, isExclusive);
+    return shape;
 }

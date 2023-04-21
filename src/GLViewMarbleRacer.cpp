@@ -17,6 +17,7 @@
 #include "WOImGuiMain.h"
 #include "WOLight.h"
 #include "WOPhysics.h"
+#include "WOPhysicsGoalBox.h"
 #include "WOPhysicsMarble.h"
 #include "WOPhysicsTriangleMesh.h"
 #include "WOSkyBox.h"
@@ -253,12 +254,13 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         wo->setPose(pose);
         worldLst->push_back(wo);
 
-        wo = WOPhysicsTriangleMesh::New(boxtrack, Vector(1, 1, 1));
-        wo->setLabel("track08");
+        // wo = WOPhysicsTriangleMesh::New(boxtrack, Vector(1, 1, 1));
+        wo = WOPhysicsGoalBox::New(Vector(1, 1, 1));
+        wo->setLabel("goalbox");
         pose.setX(Vector(1, 0, 0));
         pose.setY(Vector(0, 1, 0));
         pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(10.5, -8, -20));
+        pose.setPosition(Vector(10.5, -8, -24));
         wo->setPose(pose);
         worldLst->push_back(wo);
     }
