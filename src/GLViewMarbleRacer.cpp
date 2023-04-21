@@ -1,11 +1,14 @@
 #include "GLViewMarbleRacer.h"
 
+#include <chrono>
+
 #include "AftrGLRendererBase.h"
 #include "AftrImGuiIncludes.h"
 #include "Axes.h"
 #include "Camera.h"
 #include "GuiMenuLight.h"
 #include "GuiMenuSkyBox.h"
+#include "GuiMenuTimer.h"
 #include "GuiMenuTransform.h"
 #include "MGLSkyBox.h"
 #include "ManagerPhysics.h"
@@ -20,8 +23,6 @@
 #include "WorldList.h"
 
 using namespace Aftr;
-
-bool paused = true;
 
 GLViewMarbleRacer *GLViewMarbleRacer::New(
     const std::vector<std::string> &args) {
@@ -42,10 +43,17 @@ GLViewMarbleRacer::~GLViewMarbleRacer() {}
 void GLViewMarbleRacer::updateWorld() {
     GLView::updateWorld();
 
-    if (!paused) {
-        // ManagerPhysics::simulate(1.f / 60.f);
-        ManagerPhysics::simulate(2.f / ImGui::GetIO().Framerate);  // NOTE: Probably is a better way to get current fps
-        ManagerPhysics::syncWOsFromPhysics();
+    switch (*state) {
+        case RUNNING: {
+            ManagerPhysics::simulate(2.f / ImGui::GetIO().Framerate);  // NOTE: Probably is a better way to get current fps
+            ManagerPhysics::syncWOsFromPhysics();
+        } break;
+        case STOPPED:
+        case PAUSED: {
+            // do nothing
+        } break;
+        default:
+            break;
     }
 
     maingui->onUpdateWO();  // doesn't get called in updateWorld because it's an ImGui instance
@@ -58,6 +66,7 @@ void Aftr::GLViewMarbleRacer::loadMap() {
     this->cam->setPosition(40, 50, 35);
     this->cam->rotateAboutRelZ(-120 * DEGtoRAD);
     this->cam->rotateAboutRelY(30 * DEGtoRAD);
+    this->state = new GameState(STOPPED);
 
     // Initialize ManagerPhysics
     {
@@ -161,31 +170,6 @@ void Aftr::GLViewMarbleRacer::loadMap() {
             wo->setPosition(randx, randy, 60);
             worldLst->push_back(wo);
         }
-
-        // wo = WOPhysicsMarble::New();
-        // wo->setLabel("marble00");
-        // wo->setPosition(10, 0, 60);
-        // worldLst->push_back(wo);
-
-        // wo = WOPhysicsMarble::New();
-        // wo->setLabel("marble01");
-        // wo->setPosition(0, 10, 60);
-        // worldLst->push_back(wo);
-
-        // wo = WOPhysicsMarble::New();
-        // wo->setLabel("marble02");
-        // wo->setPosition(0, -10, 60);
-        // worldLst->push_back(wo);
-
-        // wo = WOPhysicsMarble::New();
-        // wo->setLabel("marble03");
-        // wo->setPosition(10, 0, 60);
-        // worldLst->push_back(wo);
-
-        // wo = WOPhysicsMarble::New();
-        // wo->setLabel("marble04");
-        // wo->setPosition(0, -10.1, 60);
-        // worldLst->push_back(wo);
     }
 
     // Creating test tracks
@@ -277,6 +261,12 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         pose.setPosition(Vector(10.5, -8, -20));
         wo->setPose(pose);
         worldLst->push_back(wo);
+    }
+
+    // Create timer gui
+    {
+        GuiMenuTimer *menu = GuiMenuTimer::New(state);
+        maingui->addMenu(menu);
     }
 
     // Create a test objects

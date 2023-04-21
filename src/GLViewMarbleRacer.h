@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GLView.h"
+#include "GameState.h"
 
 namespace Aftr {
 class Camera;
@@ -35,6 +36,7 @@ class GLViewMarbleRacer : public GLView {
     virtual void onCreate();
 
    private:
+    GameState *state;
     WOImGuiMain *maingui;
 };
 
