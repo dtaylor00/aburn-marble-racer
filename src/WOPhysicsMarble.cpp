@@ -8,7 +8,7 @@ using namespace physx;
 
 static std::string marble(ManagerEnvironmentConfiguration::getLMM() + "/models/marble.dae");
 
-WOPhysicsMarble::WOPhysicsMarble() : IFace(this), WOPhysics() {}
+WOPhysicsMarble::WOPhysicsMarble() : IFace(this), WOPhysics(), finished(false) {}
 WOPhysicsMarble::~WOPhysicsMarble() {}
 
 WOPhysicsMarble *WOPhysicsMarble::New(Vector scale, MESH_SHADING_TYPE shadingType) {

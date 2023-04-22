@@ -9,8 +9,14 @@ class WOPhysicsMarble : public WOPhysics {
     static WOPhysicsMarble *New(Aftr::Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstAUTO);
     virtual ~WOPhysicsMarble();
 
+    void setFinished(bool finished) { this->finished = finished; }
+    bool isFinished() { return this->finished; }
+
    protected:
     WOPhysicsMarble();
     virtual void onCreate(Aftr::Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstAUTO);
+
+   private:
+    bool finished;
 };
 }  // namespace Aftr

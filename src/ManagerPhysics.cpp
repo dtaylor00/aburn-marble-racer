@@ -4,6 +4,7 @@
 
 #include "IFaceWOPhysics.h"
 #include "Model.h"
+#include "PhysicsSimulationCallback.h"
 #include "PxConfig.h"
 #include "PxPhysicsAPI.h"
 #include "Vector.h"
@@ -22,6 +23,7 @@ PxFoundation* ManagerPhysics::pf = nullptr;
 PxScene* ManagerPhysics::scene = nullptr;
 PxMaterial* ManagerPhysics::mat = nullptr;
 PxPvd* ManagerPhysics::pvd = nullptr;
+PhysicsSimulationCallback* ManagerPhysics::simCallback = nullptr;
 
 void ManagerPhysics::init(float gravityScalar, Vector gravityNormalizedVector) {
     if (initialized) {
@@ -51,6 +53,9 @@ void ManagerPhysics::init(float gravityScalar, Vector gravityNormalizedVector) {
     }
     PxInitExtensions(*px, pvd);
 
+    // Simulation Callback
+    ManagerPhysics::simCallback = new PhysicsSimulationCallback();
+
     // Scene Descriptor
     PxSceneDesc sc(px->getTolerancesScale());
     Vector g = gravityScalar * gravityNormalizedVector;
@@ -58,6 +63,7 @@ void ManagerPhysics::init(float gravityScalar, Vector gravityNormalizedVector) {
     sc.cpuDispatcher = PxDefaultCpuDispatcherCreate(NUM_THREADS);
     sc.flags |= PxSceneFlag::eENABLE_ACTIVE_ACTORS;
     sc.gravity = PxVec3(g.x, g.y, g.z);
+    sc.simulationEventCallback = simCallback;
 
     // Scene
     ManagerPhysics::scene = px->createScene(sc);

@@ -1,13 +1,15 @@
 #include "GuiMenuTimer.h"
 
 #ifdef AFTR_CONFIG_USE_IMGUI
-#include <iostream>
-#include <sstream>
 
 #include "AftrImGuiIncludes.h"
+#include "IFaceWOPhysics.h"
+#include "ManagerPhysics.h"
+#include "WOPhysicsMarble.h"
+
 using namespace Aftr;
 
-GuiMenuTimer::GuiMenuTimer() : begin(time_point()), timer(0) {}
+GuiMenuTimer::GuiMenuTimer() : begin(time_point()), timer(0), placements() {}
 GuiMenuTimer::~GuiMenuTimer() {}
 
 GuiMenuTimer* GuiMenuTimer::New(GameState* state) {
@@ -16,18 +18,34 @@ GuiMenuTimer* GuiMenuTimer::New(GameState* state) {
     return menu;
 }
 
-void Aftr::GuiMenuTimer::onCreate(GameState* state) {
+void GuiMenuTimer::onCreate(GameState* state) {
     this->state = state;
+    ManagerPhysics::getSimulationCallback()->subscribe_onTrigger([this](PxTriggerPair* pairs, PxU32 count) {
+        this->onTrigger(pairs, count);
+    });
 }
 
-void Aftr::GuiMenuTimer::draw() {
+void GuiMenuTimer::onTrigger(PxTriggerPair* pairs, PxU32 count) {
+    std::cout << "ontrigger from menu\n";
+    for (PxU32 i = 0; i < count; i++) {
+        const PxTriggerPair& pair = pairs[i];
+
+        const PxActor* actor = pair.otherActor;
+        IFaceWOPhysics* iface = static_cast<IFaceWOPhysics*>(actor->userData);
+        WOPhysicsMarble* marble = dynamic_cast<WOPhysicsMarble*>(iface->getWO());
+        if (marble != nullptr && !marble->isFinished()) {
+            marble->setFinished(true);
+            std::pair pair = std::make_pair(marble->getLabel(), timer);
+            placements.push_back(pair);
+        }
+    }
+}
+
+void GuiMenuTimer::draw() {
     using namespace std::chrono;
 
     ImGui::Begin("Timer");
-    std::stringstream ss;
-    ss << "timer " << duration_cast<milliseconds>(timer);
-
-    ImGui::Text(ss.str().c_str());
+    ImGui::Text("time %dms", duration_cast<milliseconds>(timer));
 
     // Start, Pause, Resume
     switch (*state) {
@@ -53,12 +71,29 @@ void Aftr::GuiMenuTimer::draw() {
             break;
     }
 
-    // ImGui::Text("Hello world");
+    ImGui::Separator();
+    ImGui::Text("Marble Placement");
+    if (ImGui::BeginTable("Table", 2)) {
+        for (int row = 0; row < placements.size(); row++) {
+            auto [label, finishtime] = placements[row];
+
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            ImGui::Text("#%.2d %s", row + 1, label.c_str());
+
+            ImGui::TableNextColumn();
+            milliseconds finishtime_ms = duration_cast<milliseconds>(finishtime);
+            ImGui::Text("%dms", finishtime_ms);
+            // auto c = time.count();
+            // ImGui::Text("%d::%d::%d", (c % 1'000'000'000) / 1'000'000, (c % 1'000'000) / 1'000, c % 1'000);
+        }
+        ImGui::EndTable();
+    }
     ImGui::End();
 }
-void Aftr::GuiMenuTimer::render(const Camera& cam) {}
+void GuiMenuTimer::render(const Camera& cam) {}
 
-void Aftr::GuiMenuTimer::update() {
+void GuiMenuTimer::update() {
     switch (*state) {
         case RUNNING: {
             time_point current = std::chrono::steady_clock::now();

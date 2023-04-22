@@ -4,9 +4,11 @@
 #ifdef AFTR_CONFIG_USE_IMGUI
 
 #include <chrono>
+#include <utility>
 
 #include "GameState.h"
 #include "GuiMenuAbstract.h"
+#include "PxPhysicsAPI.h"
 
 namespace Aftr {
 
@@ -24,12 +26,15 @@ class GuiMenuTimer : public GuiMenuAbstract {
 
    protected:
     virtual void onCreate(GameState *state);
+    void onTrigger(physx::PxTriggerPair *pairs, physx::PxU32 count);
+
     GuiMenuTimer();
     GameState *state;
 
    private:
     time_point begin;
     duration timer;
+    std::vector<std::pair<std::string, duration>> placements;
 };
 
 }  // namespace Aftr

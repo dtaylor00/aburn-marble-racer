@@ -1,8 +1,8 @@
 #pragma once
 #include "AftrConfig.h"
+#include "PhysicsSimulationCallback.h"
 #include "PxPhysicsAPI.h"
 #include "Vector.h"
-// #include "pvd/PxPvd.h"
 
 using namespace physx;
 
@@ -23,12 +23,15 @@ class ManagerPhysics {
     static PxFoundation* getFoundation() { return ManagerPhysics::pf; }
     static PxScene* getScene() { return ManagerPhysics::scene; }
     static PxMaterial* getDefaultMaterial() { return ManagerPhysics::mat; }
+    static PhysicsSimulationCallback* getSimulationCallback() { return ManagerPhysics::simCallback; }
 
    protected:
     static PxPhysics* px;
     static PxFoundation* pf;
-    static PxScene* scene;
     static PxMaterial* mat;
     static PxPvd* pvd;
+
+    static PxScene* scene;
+    static PhysicsSimulationCallback* simCallback;
 };
 }  // namespace Aftr
