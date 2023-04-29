@@ -248,18 +248,50 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         wo->setPose(pose);
         worldLst->push_back(wo);
 
+        wo = WOPhysicsTriangleMesh::New(curved_right_track, Vector(1, 1, 1));
+        wo->setLabel("track07");
+        pose.setX(Vector(0, -1, 0));
+        pose.setY(Vector(1, 0, 0));
+        pose.setZ(Vector(0, 0, 1));
+        pose.setPosition(Vector(169, -55.5, -17.75));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsRotatingChamber::New();
+        wo->setLabel("track08");
+        pose.setX(Vector(0, 1, 0));
+        pose.setY(Vector(-1, 0, 0));
+        pose.setZ(Vector(0, 0, 1));
+        pose.setPosition(Vector(170.5, -27, -17.75));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsTriangleMesh::New(curved_right_track, Vector(1, 1, 1));
+        wo->setLabel("track09");
+        pose.setX(Vector(1, 0, 0));
+        pose.setY(Vector(0, 1, 0));
+        pose.setZ(Vector(0, 0, 1));
+        pose.setPosition(Vector(169, 1.5, -17.75));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(2, 1, 1));
+        wo->setLabel("track10");
+        pose.setX(Vector(0.94, 0, 0.34));
+        pose.setY(Vector(0, 1, 0));
+        pose.setZ(Vector(-0.34, 0, 0.94));
+        pose.setPosition(Vector(141, 3, -24.75));
+        wo->setPose(pose);
+        worldLst->push_back(wo);
+
         // wo = WOPhysicsTriangleMesh::New(boxtrack, Vector(1, 1, 1));
         wo = WOPhysicsGoalBox::New(Vector(1, 1, 1));
         wo->setLabel("goalbox");
         pose.setX(Vector(1, 0, 0));
         pose.setY(Vector(0, 1, 0));
         pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(180, -57, -32));
+        pose.setPosition(Vector(105, 3, -50));
         wo->setPose(pose);
-        worldLst->push_back(wo);
-
-        wo = WOPhysicsRotatingChamber::New();
-        wo->setLabel("track07");
         worldLst->push_back(wo);
     }
 

@@ -17,11 +17,6 @@ void Aftr::WOPhysicsRotatingPole::onUpdateWO() {
     if (actor != nullptr) {
         PxRigidDynamic *rigiddynamic = static_cast<PxRigidDynamic *>(actor);
         PxTransform transform = rigiddynamic->getGlobalPose();
-        // auto x = transform.rotate(PxVec3(0, 0, 0.5f));
-        // transform.p.x += 0.1f;
-        // transform.q.rotate;
-        Vector pos = this->getPosition();
-        transform.p = PxVec3(pos.x, pos.y, pos.z);
         transform.q *= PxQuat(2 * DEGtoRAD, PxVec3(0, 0, 1));
         rigiddynamic->setKinematicTarget(transform);
     }
@@ -35,8 +30,5 @@ WOPhysicsRotatingPole *WOPhysicsRotatingPole::New(WO *parent, Vector scale, MESH
 
 void WOPhysicsRotatingPole::onCreate(WO *parent, Vector scale, MESH_SHADING_TYPE shadingType) {
     WOPhysicsTriangleMesh::onCreate(rotating_pole, scale, shadingType, PxActorType::eRIGID_DYNAMIC);
-    // WO::onCreate(rotating_pole, scale, shadingType);
-    // WOPhysicsTriangleMesh::onCreatePhysics(actor);
     this->setParentWorldObject(parent);
-    // Physics creation in done by parent to create joint
 }
