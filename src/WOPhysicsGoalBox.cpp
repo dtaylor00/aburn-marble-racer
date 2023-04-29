@@ -11,14 +11,14 @@ const std::string goalbox(ManagerEnvironmentConfiguration::getLMM() + "/models/g
 WOPhysicsGoalBox::WOPhysicsGoalBox() : IFace(this), WOPhysicsTriangleMesh() {}
 WOPhysicsGoalBox::~WOPhysicsGoalBox() {}
 
-WOPhysicsGoalBox *WOPhysicsGoalBox::New(Vector scale, MESH_SHADING_TYPE shadingType) {
+WOPhysicsGoalBox *WOPhysicsGoalBox::New(Vector scale, MESH_SHADING_TYPE shadingType, PxActorType::Enum actorType) {
     WOPhysicsGoalBox *wo = new WOPhysicsGoalBox();
-    wo->onCreate(scale, shadingType);
+    wo->onCreate(scale, shadingType, actorType);
     return wo;
 }
 
-void WOPhysicsGoalBox::onCreate(Vector scale, MESH_SHADING_TYPE shadingType) {
-    WOPhysicsTriangleMesh::onCreate(goalbox, scale, shadingType);
+void WOPhysicsGoalBox::onCreate(Vector scale, MESH_SHADING_TYPE shadingType, PxActorType::Enum actorType) {
+    WOPhysicsTriangleMesh::onCreate(goalbox, scale, shadingType, actorType);
 }
 
 void WOPhysicsGoalBox::onCreatePhysics(PxActor *actor) {

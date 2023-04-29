@@ -16,6 +16,7 @@ class WOPhysicsAbstract : public WO, public IFaceWOPhysics {
     virtual void setPosition(float x, float y, float z) override;
     virtual void setPose(const Mat4& orientation_w_position) noexcept override;
     virtual void setDisplayMatrix(const Mat4& dcm) noexcept override;
+    virtual void moveRelative(const Vector& dXdYdZ) override;
 
    protected:
     WOPhysicsAbstract();

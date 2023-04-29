@@ -211,7 +211,15 @@ void GuiMenuTransform::applyTransformation() {
 
     // Only set position if a value changed or preventing changes
     if (changedRotation || lockRotation || changedPosition || lockPosition) {
-        if (changedRotation || lockRotation) selectedWO->setDisplayMatrix(calculateDisplayMatrix());
+        if (changedRotation || lockRotation) {
+            Mat4 dcm = calculateDisplayMatrix();
+            selectedWO->setDisplayMatrix(dcm);
+            WorldObjectChildContainer &children = selectedWO->getChildren();
+            for (size_t i = 0; i < children.size(); i++) {
+                WO *child = children[i];
+                child->setDisplayMatrix(dcm);
+            }
+        }
         if (changedPosition || lockPosition) selectedWO->setPosition(calculatePosition());
     }
 

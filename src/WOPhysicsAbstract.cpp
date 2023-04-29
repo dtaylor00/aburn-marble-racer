@@ -55,6 +55,11 @@ void WOPhysicsAbstract::setPosition(float x, float y, float z) {
     updatePhysicsFromPose();
 }
 
+void WOPhysicsAbstract::moveRelative(const Vector &dXdYdZ) {
+    WO::moveRelative(dXdYdZ);
+    updatePhysicsFromPose();
+}
+
 void WOPhysicsAbstract::setDisplayMatrix(const Mat4 &dcm) noexcept {
     WO::setDisplayMatrix(dcm);
     updatePhysicsFromPose();

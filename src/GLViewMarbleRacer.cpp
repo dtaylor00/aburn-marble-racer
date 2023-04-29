@@ -19,6 +19,7 @@
 #include "WOPhysics.h"
 #include "WOPhysicsGoalBox.h"
 #include "WOPhysicsMarble.h"
+#include "WOPhysicsRotatingChamber.h"
 #include "WOPhysicsTriangleMesh.h"
 #include "WOSkyBox.h"
 #include "WorldList.h"
@@ -64,8 +65,8 @@ void Aftr::GLViewMarbleRacer::loadMap() {
     this->worldLst = new WorldList();  // WorldList is a 'smart' vector that is used to store WO*'s
     this->actorLst = new WorldList();
     this->netLst = new WorldList();
-    this->cam->setPosition(40, 50, 35);
-    this->cam->rotateAboutRelZ(-120 * DEGtoRAD);
+    this->cam->setPosition(35, -80, 110);
+    this->cam->rotateAboutRelZ(90 * DEGtoRAD);
     this->cam->rotateAboutRelY(30 * DEGtoRAD);
     this->state = new GameState(STOPPED);
 
@@ -175,14 +176,16 @@ void Aftr::GLViewMarbleRacer::loadMap() {
 
     // Creating test tracks
     {
-        std::string straighttrack(ManagerEnvironmentConfiguration::getLMM() + "/models/straighttrack.dae");
-        std::string curvedtrack(ManagerEnvironmentConfiguration::getLMM() + "/models/curvedtrack.dae");
-        std::string funneltrack(ManagerEnvironmentConfiguration::getLMM() + "/models/funneltrack.dae");
-        std::string boxtrack(ManagerEnvironmentConfiguration::getLMM() + "/models/boxtrack.dae");
+        std::string straight_track(ManagerEnvironmentConfiguration::getLMM() + "/models/straight_track.dae");
+        std::string curved_left_track(ManagerEnvironmentConfiguration::getLMM() + "/models/curved_left_track.dae");
+        std::string curved_right_track(ManagerEnvironmentConfiguration::getLMM() + "/models/curved_right_track.dae");
+        std::string funnel_track(ManagerEnvironmentConfiguration::getLMM() + "/models/funnel_track.dae");
+        std::string rotating_chamber(ManagerEnvironmentConfiguration::getLMM() + "/models/rotating_chamber.dae");
+        std::string rotating_pole(ManagerEnvironmentConfiguration::getLMM() + "/models/rotating_pole.dae");
         WOPhysicsTriangleMesh *wo;
         Mat4 pose;
 
-        wo = WOPhysicsTriangleMesh::New(funneltrack);
+        wo = WOPhysicsTriangleMesh::New(funnel_track);
         wo->setLabel("track00");
         pose.setX(Vector(1, 0, 0));
         pose.setY(Vector(0, 1, 0));
@@ -191,66 +194,57 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         wo->setPose(pose);
         worldLst->push_back(wo);
 
-        wo = WOPhysicsTriangleMesh::New(straighttrack);
+        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(3, 1, 1));
         wo->setLabel("track01");
-        pose.setX(Vector(0.97, 0, 0.26));
+        pose.setX(Vector(0.97, 0, -0.26));
         pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(-0.26, 0, 0.97));
-        pose.setPosition(Vector(0, 0, 42.5));
+        pose.setZ(Vector(0.26, 0, 0.97));
+        pose.setPosition(Vector(20, 0, 40));
         wo->setPose(pose);
         worldLst->push_back(wo);
 
-        wo = WOPhysicsTriangleMesh::New(curvedtrack);
+        wo = WOPhysicsTriangleMesh::New(curved_right_track);
         wo->setLabel("track02");
-        pose.setX(Vector(0, -1, 0));
-        pose.setY(Vector(1, 0, 0));
+        pose.setX(Vector(1, 0, 0));
+        pose.setY(Vector(0, 1, 0));
         pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(-25, 6.5, 40));
+        pose.setPosition(Vector(57, -1.5, 32.2));
         wo->setPose(pose);
         worldLst->push_back(wo);
 
-        wo = WOPhysicsTriangleMesh::New(straighttrack, Vector(4, 1, 1));
+        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(2, 1, 1));
         wo->setLabel("track03");
-        pose.setX(Vector(0, 0.98, -0.17));
-        pose.setY(Vector(-1, 0, 0));
-        pose.setZ(Vector(0, 0.17, 0.98));
-        pose.setPosition(Vector(-33.5, 59, 33));
+        pose.setX(Vector(0, -0.94, -0.34));
+        pose.setY(Vector(1, 0, 0));
+        pose.setZ(Vector(0, -0.34, 0.94));
+        pose.setPosition(Vector(58.5, -29, 25));
         wo->setPose(pose);
         worldLst->push_back(wo);
 
-        wo = WOPhysicsTriangleMesh::New(curvedtrack);
+        wo = WOPhysicsTriangleMesh::New(curved_left_track);
         wo->setLabel("track04");
-        pose.setX(Vector(-1, 0, 0));
-        pose.setY(Vector(0, -1, 0));
+        pose.setX(Vector(1, 0, 0));
+        pose.setY(Vector(0, 1, 0));
         pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(-27, 112.5, 26.25));
+        pose.setPosition(Vector(60, -55.5, 18.25));
         wo->setPose(pose);
         worldLst->push_back(wo);
 
-        wo = WOPhysicsTriangleMesh::New(curvedtrack);
+        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(2, 1, 1));
         wo->setLabel("track05");
-        pose.setX(Vector(0, 1, 0));
-        pose.setY(Vector(-1, 0, 0));
-        pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(2, 114.5, 26.25));
+        pose.setX(Vector(0.87, 0, -0.5));
+        pose.setY(Vector(0, 1, 0));
+        pose.setZ(Vector(0.5, 0, 0.87));
+        pose.setPosition(Vector(87, -57, 7.8));
         wo->setPose(pose);
         worldLst->push_back(wo);
 
-        wo = WOPhysicsTriangleMesh::New(straighttrack, Vector(2, 1, 1));
+        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(3, 1, 1));
         wo->setLabel("track06");
-        pose.setX(Vector(0, 0.87, 0.5));
-        pose.setY(Vector(-1, 0, 0));
-        pose.setZ(Vector(0, -0.5, 0.87));
-        pose.setPosition(Vector(10.5, 83, 16));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
-
-        wo = WOPhysicsTriangleMesh::New(straighttrack, Vector(3, 1, 1));
-        wo->setLabel("track07");
-        pose.setX(Vector(0, 0.97, 0.26));
-        pose.setY(Vector(-1, 0, 0));
-        pose.setZ(Vector(0, -0.26, 0.97));
-        pose.setPosition(Vector(10.5, 37.5, -1.5));
+        pose.setX(Vector(0.97, 0, -0.26));
+        pose.setY(Vector(0, 1, 0));
+        pose.setZ(Vector(0.26, 0, 0.97));
+        pose.setPosition(Vector(132, -57, -10));
         wo->setPose(pose);
         worldLst->push_back(wo);
 
@@ -260,8 +254,12 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         pose.setX(Vector(1, 0, 0));
         pose.setY(Vector(0, 1, 0));
         pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(10.5, -8, -24));
+        pose.setPosition(Vector(180, -57, -32));
         wo->setPose(pose);
+        worldLst->push_back(wo);
+
+        wo = WOPhysicsRotatingChamber::New();
+        wo->setLabel("track07");
         worldLst->push_back(wo);
     }
 
