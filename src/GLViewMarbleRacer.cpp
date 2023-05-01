@@ -6,9 +6,10 @@
 #include "AftrImGuiIncludes.h"
 #include "Axes.h"
 #include "Camera.h"
+#include "GuiMenuContainer.h"
 #include "GuiMenuLight.h"
+#include "GuiMenuSimulation.h"
 #include "GuiMenuSkyBox.h"
-#include "GuiMenuTimer.h"
 #include "GuiMenuTransform.h"
 #include "MGLSkyBox.h"
 #include "ManagerPhysics.h"
@@ -93,11 +94,11 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         maingui->renderOrderType = RENDER_ORDER_TYPE::roOPAQUE;
 
         GuiMenuTransform *menu = GuiMenuTransform::New(worldLst);
-        maingui->addMenu(menu);
+        maingui->addMenu(menu, "Transform Menu");
         worldLst->push_back(maingui);
     }
 
-    // Create a light
+    // Create the light and skybox
     {
         float ga = 0.1f;  // Global Ambient Light level for this module
         ManagerLight::setGlobalAmbientLight(aftrColor4f(ga, ga, ga, 1.0f));
@@ -110,12 +111,6 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         light->setLabel("Light");
         worldLst->push_back(light);
 
-        GuiMenuLight *menu = GuiMenuLight::New(light);
-        maingui->addMenu(menu);
-    }
-
-    // Create the SkyBox
-    {
         // SkyBox Textures readily available
         std::vector<std::string> skyBoxImageNames;  // vector to store texture paths
         skyBoxImageNames.push_back(ManagerEnvironmentConfiguration::getSMM() + "/images/skyboxes/sky_water+6.jpg");
@@ -151,8 +146,12 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         worldLst->push_back(wo);
 
         MGLSkyBox *skybox = (MGLSkyBox *)wo->getModel();
-        GuiMenuSkyBox *menu = GuiMenuSkyBox::New(skybox);
-        maingui->addMenu(menu);
+        GuiMenuSkyBox *skyboxMenu = GuiMenuSkyBox::New(skybox);
+        GuiMenuLight *lightMenu = GuiMenuLight::New(light);
+        GuiMenuContainer *menu = GuiMenuContainer::New();
+        menu->addMenu(skyboxMenu);
+        menu->addMenu(lightMenu);
+        maingui->addMenu(menu, "Visual Menu");
     }
 
     // Create a few marbles
@@ -306,8 +305,8 @@ void Aftr::GLViewMarbleRacer::loadMap() {
 
     // Create timer gui
     {
-        GuiMenuTimer *menu = GuiMenuTimer::New(state);
-        maingui->addMenu(menu);
+        GuiMenuSimulation *menu = GuiMenuSimulation::New(state);
+        maingui->addMenu(menu, "Simulation Menu");
     }
 
     // Create a test objects

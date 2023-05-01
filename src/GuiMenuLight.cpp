@@ -25,7 +25,7 @@ void GuiMenuLight::onCreate(WOLight *light) {
 }
 
 void GuiMenuLight::draw() {
-    ImGui::Begin("Light Menu");
+    // ImGui::Begin("Light Menu");
     ImGui::ColorEdit4("Color", colors);
 
     if (ImGui::Button("Day Preset")) setColors(1.f, 1.f, 1.f, 1.f);
@@ -34,7 +34,7 @@ void GuiMenuLight::draw() {
     ImGui::SameLine();
     if (ImGui::Button("Night Preset")) setColors(0.3f, 0.3f, 0.6f, 1.f);
 
-    ImGui::End();
+    // ImGui::End();
 }
 
 void GuiMenuLight::render(const Camera &cam) {}

@@ -47,7 +47,7 @@ void GuiMenuTransform::render(const Camera &cam) {
 }
 
 void GuiMenuTransform::draw() {
-    ImGui::Begin("Transform Menu");
+    // ImGui::Begin("Transform Menu");
     drawList();
     ImGui::BeginDisabled(selectedWO == nullptr);
     if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
@@ -61,7 +61,7 @@ void GuiMenuTransform::draw() {
         drawRangeInput();
     }
     ImGui::EndDisabled();
-    ImGui::End();
+    // ImGui::End();
 }
 
 void GuiMenuTransform::update() {

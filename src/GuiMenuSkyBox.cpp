@@ -23,7 +23,7 @@ void GuiMenuSkyBox::onCreate(MGLSkyBox *skybox) {
 }
 
 void GuiMenuSkyBox::draw() {
-    ImGui::Begin("SkyBox Menu");
+    // ImGui::Begin("SkyBox Menu");
     size_t skinsSize = (&skybox->getSkins())->size();
     std::string currentSkinIndex = std::to_string(skybox->getSkinIndex());
     if (ImGui::BeginCombo("Selected", currentSkinIndex.c_str())) {
@@ -40,7 +40,7 @@ void GuiMenuSkyBox::draw() {
     ImGui::SameLine();
     if (ImGui::Button("Next")) skybox->useNextSkin();
 
-    ImGui::End();
+    // ImGui::End();
 }
 
 void GuiMenuSkyBox::render(const Camera &cam) {}

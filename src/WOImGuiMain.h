@@ -18,7 +18,7 @@ class WOImGuiMain : public WOImGuiAbstract {
     virtual void drawImGui_for_this_frame() override;
     virtual void onUpdateWO() override;
 
-    void addMenu(GuiMenuAbstract *menu);
+    void addMenu(GuiMenuAbstract *menu, const char *title);
 
    protected:
     virtual void onCreate(float width, float height);
@@ -26,6 +26,8 @@ class WOImGuiMain : public WOImGuiAbstract {
 
    private:
     std::vector<GuiMenuAbstract *> menus;
+    std::vector<const char *> titles;
+    std::vector<bool *> states;
 
     Camera **renderCamera;
 };

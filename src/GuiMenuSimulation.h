@@ -15,10 +15,10 @@ namespace Aftr {
 using time_point = std::chrono::steady_clock::time_point;
 using duration = std::chrono::steady_clock::duration;
 
-class GuiMenuTimer : public GuiMenuAbstract {
+class GuiMenuSimulation : public GuiMenuAbstract {
    public:
-    static GuiMenuTimer *New(GameState *state);
-    virtual ~GuiMenuTimer();
+    static GuiMenuSimulation *New(GameState *state);
+    virtual ~GuiMenuSimulation();
 
     virtual void draw() override;
     virtual void render(const Camera &cam) override;
@@ -28,13 +28,15 @@ class GuiMenuTimer : public GuiMenuAbstract {
     virtual void onCreate(GameState *state);
     void onTrigger(physx::PxTriggerPair *pairs, physx::PxU32 count);
 
-    GuiMenuTimer();
+    GuiMenuSimulation();
     GameState *state;
 
    private:
     time_point begin;
     duration timer;
     std::vector<std::pair<std::string, duration>> placements;
+    float gravityScalar;
+    float gravityVector[3];
 };
 
 }  // namespace Aftr

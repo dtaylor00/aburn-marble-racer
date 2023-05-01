@@ -1,4 +1,4 @@
-#include "GuiMenuTimer.h"
+#include "GuiMenuSimulation.h"
 
 #ifdef AFTR_CONFIG_USE_IMGUI
 
@@ -9,23 +9,36 @@
 
 using namespace Aftr;
 
-GuiMenuTimer::GuiMenuTimer() : begin(time_point()), timer(0), placements() {}
-GuiMenuTimer::~GuiMenuTimer() {}
+GuiMenuSimulation::GuiMenuSimulation() : begin(time_point()), timer(0), placements(), gravityScalar(0), gravityVector() {}
+GuiMenuSimulation::~GuiMenuSimulation() {}
 
-GuiMenuTimer* GuiMenuTimer::New(GameState* state) {
-    GuiMenuTimer* menu = new GuiMenuTimer();
+GuiMenuSimulation* GuiMenuSimulation::New(GameState* state) {
+    GuiMenuSimulation* menu = new GuiMenuSimulation();
     menu->onCreate(state);
     return menu;
 }
 
-void GuiMenuTimer::onCreate(GameState* state) {
+void GuiMenuSimulation::onCreate(GameState* state) {
     this->state = state;
     ManagerPhysics::getSimulationCallback()->subscribe_onTrigger([this](PxTriggerPair* pairs, PxU32 count) {
         this->onTrigger(pairs, count);
     });
+
+    PxScene* scene = ManagerPhysics::getScene();
+    PxVec3 gravity = scene->getGravity();
+    PxVec3 gravityNormalized = gravity.getNormalized();
+
+    if (gravityNormalized.isZero()) gravityScalar = 0;
+    else if (gravityNormalized.x != 0) gravityScalar = gravity.x / gravityNormalized.x;
+    else if (gravityNormalized.y != 0) gravityScalar = gravity.y / gravityNormalized.y;
+    else if (gravityNormalized.z != 0) gravityScalar = gravity.z / gravityNormalized.z;
+
+    gravityVector[0] = gravityNormalized.x;
+    gravityVector[1] = gravityNormalized.y;
+    gravityVector[2] = gravityNormalized.z;
 }
 
-void GuiMenuTimer::onTrigger(PxTriggerPair* pairs, PxU32 count) {
+void GuiMenuSimulation::onTrigger(PxTriggerPair* pairs, PxU32 count) {
     std::cout << "ontrigger from menu\n";
     for (PxU32 i = 0; i < count; i++) {
         const PxTriggerPair& pair = pairs[i];
@@ -41,10 +54,8 @@ void GuiMenuTimer::onTrigger(PxTriggerPair* pairs, PxU32 count) {
     }
 }
 
-void GuiMenuTimer::draw() {
+void GuiMenuSimulation::draw() {
     using namespace std::chrono;
-
-    ImGui::Begin("Timer");
     ImGui::Text("time %dms", duration_cast<milliseconds>(timer));
 
     // Start, Pause, Resume
@@ -70,6 +81,8 @@ void GuiMenuTimer::draw() {
             std::abort();
             break;
     }
+    ImGui::SliderFloat("Gravity Scalar", &gravityScalar, -25.f, 25.f);
+    ImGui::SliderFloat3("Gravity Vector", gravityVector, -1, 1);
 
     ImGui::Separator();
     ImGui::Text("Marble Placement");
@@ -89,11 +102,10 @@ void GuiMenuTimer::draw() {
         }
         ImGui::EndTable();
     }
-    ImGui::End();
 }
-void GuiMenuTimer::render(const Camera& cam) {}
+void GuiMenuSimulation::render(const Camera& cam) {}
 
-void GuiMenuTimer::update() {
+void GuiMenuSimulation::update() {
     switch (*state) {
         case RUNNING: {
             time_point current = std::chrono::steady_clock::now();

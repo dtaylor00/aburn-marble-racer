@@ -17,10 +17,7 @@ WOImGuiMain *WOImGuiMain::New(WOGUI *parentWOGUI, float width, float height) {
 }
 
 WOImGuiMain::~WOImGuiMain() {}
-WOImGuiMain::WOImGuiMain(WOGUI *parentWOGUI)
-    : IFace(this),
-      WOImGuiAbstract(parentWOGUI),
-      renderCamera(nullptr) {}
+WOImGuiMain::WOImGuiMain(WOGUI *parentWOGUI) : IFace(this), WOImGuiAbstract(parentWOGUI), renderCamera(nullptr) {}
 
 void WOImGuiMain::onCreate(float width, float height) {
     WOImGuiAbstract::onCreate(width, height);
@@ -28,15 +25,43 @@ void WOImGuiMain::onCreate(float width, float height) {
 }
 
 void WOImGuiMain::drawImGui_for_this_frame() {
+    const size_t num_menus = menus.size();
+
     ImGui::Begin("Main Menu");
-    ImGui::Text("Nothing to see here...");
+    if (ImGui::Button("Show All")) {
+        for (size_t i = 0; i < num_menus; i++) {
+            *states[i] = true;
+        }
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Hide All")) {
+        for (size_t i = 0; i < num_menus; i++) {
+            *states[i] = false;
+        }
+    }
     ImGui::End();
 
-    for (GuiMenuAbstract *m : menus) {
-        m->draw();
-        this->fileDialog_update_after_ImGui_end_is_called();
-        m->render(**renderCamera);
+    for (size_t i = 0; i < num_menus; i++) {
+        GuiMenuAbstract *m = menus[i];
+        const char *title = titles[i];
+        bool *state = states[i];
+
+        if (*state) {
+            ImGui::Begin(title, state);
+            m->draw();
+            ImGui::End();
+            this->fileDialog_update_after_ImGui_end_is_called();
+            m->render(**renderCamera);
+        }
+
+        ImGui::Begin("Main Menu");
+        std::string toggleTitle = std::format("Toggle {}", title);
+        if (ImGui::Button(toggleTitle.c_str())) {
+            *state = !(*state);
+        }
+        ImGui::End();
     }
+
     ImGui::Begin("Main Menu");
     ImGui::Text("Current FPS: %.1f", ImGui::GetIO().Framerate);
     ImGui::End();
@@ -48,8 +73,10 @@ void WOImGuiMain::onUpdateWO() {
     }
 }
 
-void WOImGuiMain::addMenu(GuiMenuAbstract *menu) {
+void WOImGuiMain::addMenu(GuiMenuAbstract *menu, const char *title) {
     menus.push_back(menu);
+    titles.push_back(title);
+    states.push_back(new bool(true));
 }
 
 #endif
