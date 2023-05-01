@@ -1,12 +1,14 @@
 #pragma once
 
-#include "WOPhysicsTriangleMesh.h"
+#include "WOPhysicsTrack.h"
 
 namespace Aftr {
-class WOPhysicsRotatingChamber : public WOPhysicsTriangleMesh {
+class WOPhysicsRotatingChamber : public WOPhysicsTrack {
    public:
     static WOPhysicsRotatingChamber* New(Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstAUTO, physx::PxActorType::Enum actorType = physx::PxActorType::eRIGID_STATIC);
     virtual ~WOPhysicsRotatingChamber();
+    virtual WO* clone() override;
+    virtual WO* clone(Mat4 pose, Vector scale) override;
 
    protected:
     WOPhysicsRotatingChamber();

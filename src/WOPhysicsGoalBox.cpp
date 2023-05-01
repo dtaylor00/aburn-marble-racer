@@ -8,7 +8,7 @@ using namespace Aftr;
 
 const std::string goalbox(ManagerEnvironmentConfiguration::getLMM() + "/models/goalbox.dae");
 
-WOPhysicsGoalBox::WOPhysicsGoalBox() : IFace(this), WOPhysicsTriangleMesh() {}
+WOPhysicsGoalBox::WOPhysicsGoalBox() : IFace(this), WOPhysicsTrack() {}
 WOPhysicsGoalBox::~WOPhysicsGoalBox() {}
 
 WOPhysicsGoalBox *WOPhysicsGoalBox::New(Vector scale, MESH_SHADING_TYPE shadingType, PxActorType::Enum actorType) {
@@ -18,7 +18,7 @@ WOPhysicsGoalBox *WOPhysicsGoalBox::New(Vector scale, MESH_SHADING_TYPE shadingT
 }
 
 void WOPhysicsGoalBox::onCreate(Vector scale, MESH_SHADING_TYPE shadingType, PxActorType::Enum actorType) {
-    WOPhysicsTriangleMesh::onCreate(goalbox, scale, shadingType, actorType);
+    WOPhysicsTrack::onCreate("Goal Box", goalbox, scale, shadingType, actorType);
 }
 
 void WOPhysicsGoalBox::onCreatePhysics(PxActor *actor) {
@@ -34,5 +34,17 @@ void WOPhysicsGoalBox::onCreatePhysics(PxActor *actor) {
         PxRigidActorExt::createExclusiveShape(*rigidactor, box, *mat, flags);
     }
 
-    WOPhysicsTriangleMesh::onCreatePhysics(actor);
+    WOPhysicsTrack::onCreatePhysics(actor);
+}
+
+WO *WOPhysicsGoalBox::clone() {
+    Vector scale = model->getScale();
+    WO *wo = WOPhysicsGoalBox::New(scale);
+    return wo;
+}
+
+WO *WOPhysicsGoalBox::clone(Mat4 pose, Vector scale) {
+    WO *wo = WOPhysicsGoalBox::New(scale);
+    wo->setPose(pose);
+    return wo;
 }

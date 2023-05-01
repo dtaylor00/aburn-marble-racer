@@ -1,9 +1,9 @@
 #pragma once
 
-#include "WOPhysicsTriangleMesh.h"
+#include "WOPhysicsTrack.h"
 
 namespace Aftr {
-class WOPhysicsRotatingPole : public WOPhysicsTriangleMesh {  // technically doesn't need to be triangle mesh child
+class WOPhysicsRotatingPole : public WOPhysicsTrack { 
    public:
     static WOPhysicsRotatingPole* New(WO* parent, Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstAUTO);
     virtual ~WOPhysicsRotatingPole();

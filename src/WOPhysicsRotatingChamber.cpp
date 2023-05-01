@@ -9,7 +9,7 @@ using namespace Aftr;
 
 const std::string rotating_chamber(ManagerEnvironmentConfiguration::getLMM() + "/models/rotating_chamber.dae");
 
-WOPhysicsRotatingChamber::WOPhysicsRotatingChamber() : IFace(this), WOPhysicsTriangleMesh() {}
+WOPhysicsRotatingChamber::WOPhysicsRotatingChamber() : IFace(this), WOPhysicsTrack() {}
 WOPhysicsRotatingChamber::~WOPhysicsRotatingChamber() {}
 
 WOPhysicsRotatingChamber *WOPhysicsRotatingChamber::New(Vector scale, MESH_SHADING_TYPE shadingType, PxActorType::Enum actorType) {
@@ -19,21 +19,33 @@ WOPhysicsRotatingChamber *WOPhysicsRotatingChamber::New(Vector scale, MESH_SHADI
 }
 
 void WOPhysicsRotatingChamber::onCreate(Vector scale, MESH_SHADING_TYPE shadingType, PxActorType::Enum actorType) {
-    WOPhysicsTriangleMesh::onCreate(rotating_chamber, scale, shadingType, actorType);
-    WOPhysicsTriangleMesh *wo = WOPhysicsRotatingPole::New(this, scale, shadingType);
+    WOPhysicsTrack::onCreate("Rotating Chamber", rotating_chamber, scale, shadingType, actorType);
+    WO *wo = WOPhysicsRotatingPole::New(this, scale, shadingType);
     children.push_back(wo);
 }
 
 void WOPhysicsRotatingChamber::setPose(const Mat4 &orientation_w_position) noexcept {
-    WOPhysicsTriangleMesh::setPose(orientation_w_position);
+    WOPhysicsTrack::setPose(orientation_w_position);
     for (size_t i = 0; i < children.size(); i++) {
         children[i]->setPose(orientation_w_position);
     }
 }
 
-void Aftr::WOPhysicsRotatingChamber::setDisplayMatrix(const Mat4 &dcm) noexcept {
-    WOPhysicsTriangleMesh::setDisplayMatrix(dcm);
+void WOPhysicsRotatingChamber::setDisplayMatrix(const Mat4 &dcm) noexcept {
+    WOPhysicsTrack::setDisplayMatrix(dcm);
     for (size_t i = 0; i < children.size(); i++) {
         children[i]->setDisplayMatrix(dcm);
     }
+}
+
+WO *WOPhysicsRotatingChamber::clone() {
+    Vector scale = model->getScale();
+    WO *wo = WOPhysicsRotatingChamber::New(scale);
+    return wo;
+}
+
+WO *WOPhysicsRotatingChamber::clone(Mat4 pose, Vector scale) {
+    WO *wo = WOPhysicsRotatingChamber::New(scale);
+    wo->setPose(pose);
+    return wo;
 }

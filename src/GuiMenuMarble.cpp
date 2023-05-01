@@ -1,7 +1,6 @@
 #include "GuiMenuMarble.h"
 
 #ifdef AFTR_CONFIG_USE_IMGUI
-#include <random>
 
 #include "AftrImGuiIncludes.h"
 #include "GLView.h"
@@ -12,18 +11,16 @@
 
 using namespace Aftr;
 
-GuiMenuMarble::GuiMenuMarble() : worldLst(nullptr), position{0, 0, 105}, offset{-8, 8, -8, 8, 0, 0}, selectedId(-1) {}
+GuiMenuMarble::GuiMenuMarble() : position{0, 0, 105}, offset{-8, 8, -8, 8, 0, 0}, selectedId(-1), selectedMarble(nullptr) {}
 GuiMenuMarble::~GuiMenuMarble() {}
 
-GuiMenuMarble* GuiMenuMarble::New(WorldContainer* worldLst) {
+GuiMenuMarble* GuiMenuMarble::New() {
     GuiMenuMarble* menu = new GuiMenuMarble();
-    menu->onCreate(worldLst);
+    menu->onCreate();
     return menu;
 }
 
-void GuiMenuMarble::onCreate(WorldContainer* worldLst) {
-    this->worldLst = worldLst;
-}
+void GuiMenuMarble::onCreate() {}
 
 void GuiMenuMarble::draw() {
     if (ImGui::BeginCombo("Selected", selectedId == -1 ? "none" : selectedMarble->getLabel().c_str())) {
@@ -57,7 +54,7 @@ void GuiMenuMarble::draw() {
         wo->setLabel(label);
         wo->setPosition(x, y, z);
 
-        this->worldLst->push_back(wo);
+        ManagerGLView::getGLView()->getWorldContainer()->push_back(wo);
     }
 
     ImGui::InputFloat3("Position", position);

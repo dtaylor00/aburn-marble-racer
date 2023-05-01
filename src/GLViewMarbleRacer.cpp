@@ -11,6 +11,7 @@
 #include "GuiMenuMarble.h"
 #include "GuiMenuSimulation.h"
 #include "GuiMenuSkyBox.h"
+#include "GuiMenuTrack.h"
 #include "GuiMenuTransform.h"
 #include "MGLSkyBox.h"
 #include "ManagerMarble.h"
@@ -172,12 +173,15 @@ void Aftr::GLViewMarbleRacer::loadMap() {
             worldLst->push_back(wo);
         }
 
-        GuiMenuMarble *menu = GuiMenuMarble::New(worldLst);
+        GuiMenuMarble *menu = GuiMenuMarble::New();
         maingui->addMenu(menu, "Marble Menu");
     }
 
     // Creating test tracks
     {
+        GuiMenuTrack *menu = GuiMenuTrack::New();
+        maingui->addMenu(menu, "Track Menu");
+
         std::string straight_track(ManagerEnvironmentConfiguration::getLMM() + "/models/straight_track.dae");
         std::string curved_left_track(ManagerEnvironmentConfiguration::getLMM() + "/models/curved_track_left.dae");
         std::string curved_right_track(ManagerEnvironmentConfiguration::getLMM() + "/models/curved_track_right.dae");

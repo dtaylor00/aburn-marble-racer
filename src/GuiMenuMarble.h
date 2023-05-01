@@ -6,12 +6,11 @@
 #include "GuiMenuAbstract.h"
 
 namespace Aftr {
-class WorldContainer;
 class WOPhysicsMarble;
 
 class GuiMenuMarble : public GuiMenuAbstract {
    public:
-    static GuiMenuMarble *New(WorldContainer *worldLst);
+    static GuiMenuMarble *New();
     virtual ~GuiMenuMarble();
 
     virtual void draw() override;
@@ -19,11 +18,10 @@ class GuiMenuMarble : public GuiMenuAbstract {
     virtual void update() override;
 
    protected:
-    virtual void onCreate(WorldContainer *worldLst);
+    virtual void onCreate();
     GuiMenuMarble();
 
    private:
-    WorldContainer *worldLst;
     float position[3];
     float offset[6];  // [xmin, xmax, ymin, ymax, zmin, zmax]
     int selectedId;
