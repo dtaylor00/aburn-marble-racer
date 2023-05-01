@@ -8,10 +8,12 @@
 #include "Camera.h"
 #include "GuiMenuContainer.h"
 #include "GuiMenuLight.h"
+#include "GuiMenuMarble.h"
 #include "GuiMenuSimulation.h"
 #include "GuiMenuSkyBox.h"
 #include "GuiMenuTransform.h"
 #include "MGLSkyBox.h"
+#include "ManagerMarble.h"
 #include "ManagerPhysics.h"
 #include "PxPhysicsAPI.h"
 #include "WO.h"
@@ -71,8 +73,9 @@ void Aftr::GLViewMarbleRacer::loadMap() {
     this->cam->rotateAboutRelY(30 * DEGtoRAD);
     this->state = new GameState(STOPPED);
 
-    // Initialize ManagerPhysics
+    // Initialize Managers
     {
+        ManagerMarble::init();
         ManagerPhysics::init(25.f, Vector(0, 0, -1));
         std::cout << "Initialized ManagerPhysics...\n";
     }
@@ -156,21 +159,21 @@ void Aftr::GLViewMarbleRacer::loadMap() {
 
     // Create a few marbles
     {
-        WOPhysicsMarble *wo;
-
-        for (size_t i = 0; i < 15; i++) {
-            // TODO: replace std:rand with a better rng
-            int randx = (std::rand() % 6 - 3);  // number between -3 and 3
-            int randy = (std::rand() % 6 - 3);  // number between -3 and 3
-            randx = randx > 0 ? randx + 5 : randx - 5;
-            randy = randy > 0 ? randy + 5 : randy - 5;
-            std::string label = std::format("marble{:02d}", i);
+        WO *wo;
+        for (size_t i = 0; i < 10; i++) {
+            std::string label = std::format("marble{:02d}", ManagerMarble::getMarbleCount());
+            float x = ManagerRandomNumber::getRandomFloat(-8, 8);
+            float y = ManagerRandomNumber::getRandomFloat(-8, 8);
+            float z = 105;
 
             wo = WOPhysicsMarble::New();
             wo->setLabel(label);
-            wo->setPosition(randx, randy, 105);
+            wo->setPosition(x, y, z);
             worldLst->push_back(wo);
         }
+
+        GuiMenuMarble *menu = GuiMenuMarble::New(worldLst);
+        maingui->addMenu(menu, "Marble Menu");
     }
 
     // Creating test tracks

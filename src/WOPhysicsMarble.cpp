@@ -1,5 +1,6 @@
 #include "WOPhysicsMarble.h"
 
+#include "ManagerMarble.h"
 #include "ManagerPhysics.h"
 #include "PxPhysicsAPI.h"
 
@@ -8,7 +9,9 @@ using namespace physx;
 
 static std::string marble(ManagerEnvironmentConfiguration::getLMM() + "/models/marble.dae");
 
-WOPhysicsMarble::WOPhysicsMarble() : IFace(this), WOPhysics(), finished(false) {}
+WOPhysicsMarble::WOPhysicsMarble() : IFace(this), WOPhysics(), marbleId(-1) {
+    ManagerMarble::registerMarble(this);
+}
 WOPhysicsMarble::~WOPhysicsMarble() {}
 
 WOPhysicsMarble *WOPhysicsMarble::New(Vector scale, MESH_SHADING_TYPE shadingType) {
@@ -33,4 +36,12 @@ void WOPhysicsMarble::onCreate(Vector scale, MESH_SHADING_TYPE shadingType) {
     body->attachShape(*shape);
 
     this->onCreatePhysics(body);
+}
+
+int Aftr::WOPhysicsMarble::getMarbleId() {
+    return this->marbleId;
+}
+
+void Aftr::WOPhysicsMarble::setMarbleId(int id) {
+    this->marbleId = id;
 }

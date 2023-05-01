@@ -4,6 +4,7 @@
 
 #include "AftrImGuiIncludes.h"
 #include "IFaceWOPhysics.h"
+#include "ManagerMarble.h"
 #include "ManagerPhysics.h"
 #include "WOPhysicsMarble.h"
 
@@ -39,15 +40,14 @@ void GuiMenuSimulation::onCreate(GameState* state) {
 }
 
 void GuiMenuSimulation::onTrigger(PxTriggerPair* pairs, PxU32 count) {
-    std::cout << "ontrigger from menu\n";
     for (PxU32 i = 0; i < count; i++) {
         const PxTriggerPair& pair = pairs[i];
 
         const PxActor* actor = pair.otherActor;
         IFaceWOPhysics* iface = static_cast<IFaceWOPhysics*>(actor->userData);
         WOPhysicsMarble* marble = dynamic_cast<WOPhysicsMarble*>(iface->getWO());
-        if (marble != nullptr && !marble->isFinished()) {
-            marble->setFinished(true);
+        if (marble != nullptr && !ManagerMarble::hasFinished(marble)) {
+            ManagerMarble::setFinished(marble);
             std::pair pair = std::make_pair(marble->getLabel(), timer);
             placements.push_back(pair);
         }
@@ -120,6 +120,12 @@ void GuiMenuSimulation::update() {
             std::abort();
             break;
     }
+
+    Vector v = Vector(gravityVector).normalizeMe();
+    PxVec3 gravity = gravityScalar * PxVec3(v.x, v.y, v.z);
+
+    PxScene* scene = ManagerPhysics::getScene();
+    scene->setGravity(gravity);
 }
 
 #endif

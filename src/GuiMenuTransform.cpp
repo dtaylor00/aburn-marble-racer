@@ -33,7 +33,7 @@ GuiMenuTransform::GuiMenuTransform()
       lockPosition(false),
       disableYaw(false),
       disableYawPitch(false),
-      disableDcmTable(false),
+      disableDcmTable(true),
       minPosSlider(-100),
       maxPosSlider(100) {}
 
