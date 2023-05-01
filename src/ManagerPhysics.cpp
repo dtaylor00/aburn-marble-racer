@@ -75,7 +75,7 @@ void ManagerPhysics::init(float gravityScalar, Vector gravityNormalizedVector) {
     }
 
     // Material
-    ManagerPhysics::mat = px->createMaterial(0.5f, 0.5f, 1.0f);
+    ManagerPhysics::mat = px->createMaterial(1.f, 1.f, 1.0f);
     if (mat == nullptr) {
         std::cout << "ERROR: createMaterial failed, aborting...\n";
         std::abort();

@@ -37,6 +37,9 @@ void WOImGuiMain::drawImGui_for_this_frame() {
         this->fileDialog_update_after_ImGui_end_is_called();
         m->render(**renderCamera);
     }
+    ImGui::Begin("Main Menu");
+    ImGui::Text("Current FPS: %.1f", ImGui::GetIO().Framerate);
+    ImGui::End();
 }
 
 void WOImGuiMain::onUpdateWO() {
