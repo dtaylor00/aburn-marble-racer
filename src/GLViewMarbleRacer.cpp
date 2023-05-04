@@ -111,7 +111,7 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         light->setPosition(Vector(0, 0, 100));
         // Set the light's display matrix such that it casts light in a direction parallel to the -z axis (ie, downwards as though it was "high noon")
         // for shadow mapping to work, this->glRenderer->isUsingShadowMapping( true ), must be invoked.
-        light->getModel()->setDisplayMatrix(Mat4::rotateIdentityMat({0, 1, 0}, 90.0f * Aftr::DEGtoRAD));
+        light->getModel()->setDisplayMatrix(Mat4::rotateIdentityMat({0, 1, 0}, 45.0f * Aftr::DEGtoRAD));
         light->setLabel("Light");
         worldLst->push_back(light);
 
