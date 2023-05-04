@@ -6,7 +6,7 @@
 namespace Aftr {
 class WOPhysicsMarble : public WOPhysics {
    public:
-    static WOPhysicsMarble *New(Aftr::Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstAUTO);
+    static WOPhysicsMarble *New(Aftr::Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstFLAT);
     virtual ~WOPhysicsMarble();
 
     int getMarbleId();
@@ -14,7 +14,7 @@ class WOPhysicsMarble : public WOPhysics {
 
    protected:
     WOPhysicsMarble();
-    virtual void onCreate(Aftr::Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstAUTO);
+    virtual void onCreate(Aftr::Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstFLAT);
 
     int marbleId;
 };

@@ -177,137 +177,166 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         maingui->addMenu(menu, "Marble Menu");
     }
 
-    // Creating test tracks
+    // Creating demo track
     {
         GuiMenuTrack *menu = GuiMenuTrack::New();
         maingui->addMenu(menu, "Track Menu");
-
-        std::string straight_track(ManagerEnvironmentConfiguration::getLMM() + "/models/straight_track.dae");
-        std::string curved_left_track(ManagerEnvironmentConfiguration::getLMM() + "/models/curved_track_left.dae");
-        std::string curved_right_track(ManagerEnvironmentConfiguration::getLMM() + "/models/curved_track_right.dae");
-        std::string funnel_track(ManagerEnvironmentConfiguration::getLMM() + "/models/funnel_track.dae");
-        std::string rotating_chamber(ManagerEnvironmentConfiguration::getLMM() + "/models/rotating_chamber.dae");
-        std::string rotating_pole(ManagerEnvironmentConfiguration::getLMM() + "/models/rotating_pole.dae");
-        WOPhysicsTriangleMesh *wo;
         Mat4 pose;
+        Vector scale(1, 1, 1);
 
-        wo = WOPhysicsTriangleMesh::New(funnel_track);
-        wo->setLabel("track00");
-        pose.setX(Vector(1, 0, 0));
-        pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(0, 0, 100));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+        // FIXME: Definitely should have made a manager class for tracks like the marbles.
+        // Spawning tracks through the menu is messy and ugly and needs to be factored out.
+        // Morever, because spawning the tracks requires waiting for the model to load,
+        // the track number assigned is not the same order as created here, which could also
+        // probably be fixed with a manager class.
+        {  // whole bunch of track posing and scaling code
+            pose.setX(Vector(1, 0, 0));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(0, 0, 100));
+            scale = Vector(1, 1, 1);
+            menu->spawnTrack(0, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(3, 1, 1));
-        wo->setLabel("track01");
-        pose.setX(Vector(0.97, 0, -0.26));
-        pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(0.26, 0, 0.97));
-        pose.setPosition(Vector(20.43f, 0, 83.443f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(1, 0, 0));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(12, 0, 80));
+            scale = Vector(1, 2, 1);
+            menu->spawnTrack(4, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(curved_right_track);
-        wo->setLabel("track02");
-        pose.setX(Vector(1, 0, 0));
-        pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(57.002f, -1.5f, 75.878f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(0.87, 0, -0.5));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(0.5, 0, 0.87));
+            pose.setPosition(Vector(65, 0, 51));
+            scale = Vector(1, 1.2, 1);
+            menu->spawnTrack(5, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(2, 1, 1));
-        wo->setLabel("track03");
-        pose.setX(Vector(0, -0.94, -0.34));
-        pose.setY(Vector(1, 0, 0));
-        pose.setZ(Vector(0, -0.34, 0.94));
-        pose.setPosition(Vector(58.502f, -29.991f, 68.909f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(0.85, -0.49, -0.17));
+            pose.setY(Vector(0.5, 0.87, 0));
+            pose.setZ(Vector(0.15, -0.09, 0.98));
+            pose.setPosition(Vector(103, -13.8, 29));
+            scale = Vector(1.75, 1.5, 1);
+            menu->spawnTrack(1, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(curved_left_track);
-        wo->setLabel("track04");
-        pose.setX(Vector(0, -1, 0));
-        pose.setY(Vector(1, 0, 0));
-        pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(60.002f, -56.088f, 62.360f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(1, 0, 0));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(135, -25, 18));
+            scale = Vector(2, 2, 1);
+            menu->spawnTrack(0, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(2, 1, 1));
-        wo->setLabel("track05");
-        pose.setX(Vector(0.87, 0, -0.5));
-        pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(0.5, 0, 0.87));
-        pose.setPosition(Vector(87.573f, -57.588f, 51.973f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(0.94, 0, -0.34));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(0.34, 0, 0.94));
+            pose.setPosition(Vector(140, -25, 8));
+            scale = Vector(1.5, 0.8, 0.8);
+            menu->spawnTrack(1, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(3, 1, 1));
-        wo->setLabel("track06");
-        pose.setX(Vector(0.97, 0, -0.26));
-        pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(0.26, 0, 0.97));
-        pose.setPosition(Vector(133.02f, -57.588f, 34.558f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(1, 0, 0));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(154.132, -17.201, -17.489));
+            scale = Vector(1, 1, 1.5);
+            menu->spawnTrack(6, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(curved_left_track, Vector(1, 1, 1));
-        wo->setLabel("track07");
-        pose.setX(Vector(1, 0, 0));
-        pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(169.6f, -56.088f, 26.994f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(0, 1, 0));
+            pose.setY(Vector(-1, 0, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(169.82, -26.34, -50.20));
+            scale = Vector(1, 1, 1);
+            menu->spawnTrack(7, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(0.5f, 1, 1));
-        wo->setLabel("track08");
-        pose.setX(Vector(0, 0.98, -0.17));
-        pose.setY(Vector(-1, 0, 0));
-        pose.setZ(Vector(0, 0.17, 0.98));
-        pose.setPosition(Vector(171.1f, -42.056f, 26.155f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(0, 0, -1));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(1, 0, 0));
+            pose.setPosition(Vector(164, -55, -90));
+            scale = Vector(1, 1, 1.5);
+            menu->spawnTrack(5, pose, scale);
 
-        wo = WOPhysicsRotatingChamber::New();
-        wo->setLabel("track09");
-        pose.setX(Vector(0, 1, 0));
-        pose.setY(Vector(-1, 0, 0));
-        pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(171.1f, -17.74f, 25.356f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(0, 0, -1));
+            pose.setY(Vector(0, -1, 0));
+            pose.setZ(Vector(-1, 0, 0));
+            pose.setPosition(Vector(174, -55, -90));
+            scale = Vector(1, 1, 1.5);
+            menu->spawnTrack(5, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(curved_right_track, Vector(1, 1, 1));
-        wo->setLabel("track10");
-        pose.setX(Vector(1, 0, 0));
-        pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(169.6f, 10.76f, 25.25f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(0, -1, 0));
+            pose.setY(Vector(1, 0, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(170, 0, -55));
+            scale = Vector(0.5, 1.5, 0.5);
+            menu->spawnTrack(4, pose, scale);
 
-        wo = WOPhysicsTriangleMesh::New(straight_track, Vector(2, 1, 1));
-        wo->setLabel("track11");
-        pose.setX(Vector(0.94, 0, 0.34));
-        pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(-0.34, 0, 0.94));
-        pose.setPosition(Vector(141.11f, 12.26f, 18.150f));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(0, 1, 0));
+            pose.setY(Vector(-1, 0, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(170, -5, -65));
+            scale = Vector(0.5, 1.5, 0.5);
+            menu->spawnTrack(4, pose, scale);
 
-        // wo = WOPhysicsTriangleMesh::New(boxtrack, Vector(1, 1, 1));
-        wo = WOPhysicsGoalBox::New(Vector(1, 1, 1));
-        wo->setLabel("goalbox");
-        pose.setX(Vector(1, 0, 0));
-        pose.setY(Vector(0, 1, 0));
-        pose.setZ(Vector(0, 0, 1));
-        pose.setPosition(Vector(105, 12.26f, -10));
-        wo->setPose(pose);
-        worldLst->push_back(wo);
+            pose.setX(Vector(0, -1, 0));
+            pose.setY(Vector(1, 0, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(170, 0, -75));
+            scale = Vector(0.5, 1.5, 0.5);
+            menu->spawnTrack(4, pose, scale);
+
+            pose.setX(Vector(0, 1, 0));
+            pose.setY(Vector(-1, 0, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(170, -5, -85));
+            scale = Vector(0.5, 1.5, 0.5);
+            menu->spawnTrack(4, pose, scale);
+
+            pose.setX(Vector(0, -1, 0));
+            pose.setY(Vector(1, 0, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(170, 0, -95));
+            scale = Vector(0.5, 1.5, 0.5);
+            menu->spawnTrack(4, pose, scale);
+
+            pose.setX(Vector(0, 1, 0));
+            pose.setY(Vector(-1, 0, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(170, -5, -105));
+            scale = Vector(0.5, 1.5, 0.5);
+            menu->spawnTrack(4, pose, scale);
+
+            pose.setX(Vector(0, -1, 0));
+            pose.setY(Vector(1, 0, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(170, 0, -115));
+            scale = Vector(0.5, 1.5, 0.5);
+            menu->spawnTrack(4, pose, scale);
+
+            pose.setX(Vector(1, 0, 0));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(170, -45, -140));
+            scale = Vector(3, 3, 2);
+            menu->spawnTrack(0, pose, scale);
+
+            pose.setX(Vector(1, 0, 0));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(170, -45, -150));
+            scale = Vector(1, 1, 1);
+            menu->spawnTrack(0, pose, scale);
+
+            pose.setX(Vector(0.94, 0, 0.34));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(-0.34, 0, 0.94));
+            pose.setPosition(Vector(145, -45, -170));
+            scale = Vector(4, 0.5, 2);
+            menu->spawnTrack(1, pose, scale);
+
+            pose.setX(Vector(1, 0, 0));
+            pose.setY(Vector(0, 1, 0));
+            pose.setZ(Vector(0, 0, 1));
+            pose.setPosition(Vector(95.5, -45, -205));
+            scale = Vector(1, 1, 1);
+            menu->spawnTrack(8, pose, scale);
+        }
     }
 
     // Create timer gui
@@ -315,23 +344,4 @@ void Aftr::GLViewMarbleRacer::loadMap() {
         GuiMenuSimulation *menu = GuiMenuSimulation::New(state);
         maingui->addMenu(menu, "Simulation Menu");
     }
-
-    // Create a test objects
-    // {
-    //     PxPhysics *px = ManagerPhysics::getPhysics();
-    //     PxScene *scene = ManagerPhysics::getScene();
-    //     PxMaterial *mat = ManagerPhysics::getDefaultMaterial();
-
-    //     std::string box(ManagerEnvironmentConfiguration::getSMM() + "/models/cube4x4x4redShinyPlastic_pp.wrl");
-    //     PxBoxGeometry geom(2.f, 2.f, 2.f);
-    //     PxShape *shape = px->createShape(geom, *mat, true);
-    //     PxTransform t({0, 0, 0});
-
-    //     PxRigidDynamic *body = px->createRigidDynamic(t);
-    //     body->attachShape(*shape);
-    //     WOPhysics *wo = WOPhysics::New(body, box, Vector(1, 1, 1), MESH_SHADING_TYPE::mstFLAT);
-    //     wo->setLabel("box");
-    //     wo->setPosition(10, 10, 20);
-    //     worldLst->push_back(wo);
-    // }
 }

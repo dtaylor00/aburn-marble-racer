@@ -21,6 +21,7 @@ using namespace Aftr;
 
 static std::string filename(ManagerEnvironmentConfiguration::getSMM() + "/models/cube4x4x4redShinyPlastic_pp.wrl");
 GuiMenuTrack::GuiMenuTrack() : rpy(0, 0, 0), pos(0, 0, 0), scale(1, 1, 1), distance(30.f), dcm(), order{ZAxis, YAxis, XAxis}, locked(true), showProjection(true), showAxes(true), tracks(), selected(nullptr), axes(nullptr), camptrptr(nullptr) {}
+
 GuiMenuTrack::~GuiMenuTrack() {}
 
 GuiMenuTrack* GuiMenuTrack::New() {
@@ -33,7 +34,7 @@ void Aftr::GuiMenuTrack::addTrack(IFaceWOTrack* track) {
     Tex texture = *ManagerTex::loadTexAsync(ManagerEnvironmentConfiguration::getLMM() + "/images/transparent_blue.png");
     WO* wo = track->getWO();  // Idea: A WOProjection class that takes WO pointer and only renders that WO model with a transparent texture
 
-    wo->upon_async_model_loaded([wo, track, texture] {
+    wo->upon_async_model_loaded([this, wo, track, texture] {
         wo->getModel()->getSkin().getMultiTextureSet().at(0) = texture;
         track->removeAllActors();
     });
@@ -63,11 +64,17 @@ void GuiMenuTrack::onCreate() {
         std::string curved_track_left(ManagerEnvironmentConfiguration::getLMM() + "/models/curved_track_left.dae");
         std::string curved_track_right(ManagerEnvironmentConfiguration::getLMM() + "/models/curved_track_right.dae");
         std::string funnel_track(ManagerEnvironmentConfiguration::getLMM() + "/models/funnel_track.dae");
+        std::string tautochrone_track(ManagerEnvironmentConfiguration::getLMM() + "/models/tautochrone_track.dae");
+        std::string waterfall_track(ManagerEnvironmentConfiguration::getLMM() + "/models/waterfall_track.dae");
+        std::string spiral_track(ManagerEnvironmentConfiguration::getLMM() + "/models/spiral_track.dae");
 
         addTrack(WOPhysicsTrack::New("Funnel", funnel_track));
         addTrack(WOPhysicsTrack::New("Straight Track", straight_track));
         addTrack(WOPhysicsTrack::New("Curved Track (Left)", curved_track_left));
         addTrack(WOPhysicsTrack::New("Curved Track (Right)", curved_track_right));
+        addTrack(WOPhysicsTrack::New("Tautochrone Track", tautochrone_track));
+        addTrack(WOPhysicsTrack::New("Waterfall Track", waterfall_track));
+        addTrack(WOPhysicsTrack::New("Spiral Track", spiral_track));
         addTrack(WOPhysicsRotatingChamber::New());
         addTrack(WOPhysicsGoalBox::New());
     }
@@ -126,14 +133,30 @@ void GuiMenuTrack::draw() {
 
     ImGui::BeginDisabled(selected == nullptr);
     if (ImGui::Button("Spawn Track")) {
-        static int i = 0;
         dcm.setPosition(pos);
-        std::string label = std::format("track{:02d}", i);
-        WO* wo = selected->clone(dcm, scale);
-        wo->setLabel(label);
-        ManagerGLView::getGLView()->getWorldContainer()->push_back(wo);
+        spawnTrack(selected, dcm, scale);
     }
     ImGui::EndDisabled();
+}
+
+void GuiMenuTrack::spawnTrack(int id, Mat4 pose, Vector scale) {
+    spawnTrack(tracks.at(id), pose, scale);
+}
+
+void GuiMenuTrack::spawnTrack(IFaceWOTrack* iface, Mat4 pose, Vector scale) {
+    if (iface->getWO()->getModel()->getModelDataShared() == nullptr) {
+        // just defer it to later
+        iface->getWO()->upon_async_model_loaded([this, iface, pose, scale] { this->spawnTrack(iface, pose, scale); });
+        return;
+    }
+
+    static int i = 0;
+    dcm.setPosition(pos);
+    std::string label = std::format("track{:02d}", i);
+    WO* wo = iface->clone(pose, scale);
+    wo->setLabel(label);
+    ManagerGLView::getGLView()->getWorldContainer()->push_back(wo);
+    i++;
 }
 
 void GuiMenuTrack::render(const Camera& cam) {

@@ -5,7 +5,7 @@
 namespace Aftr {
 class WOPhysicsRotatingPole : public WOPhysicsTrack { 
    public:
-    static WOPhysicsRotatingPole* New(WO* parent, Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstAUTO);
+    static WOPhysicsRotatingPole* New(WO* parent, Vector scale = Vector(1, 1, 1), MESH_SHADING_TYPE shadingType = MESH_SHADING_TYPE::mstFLAT);
     virtual ~WOPhysicsRotatingPole();
     virtual void onUpdateWO() override;
 

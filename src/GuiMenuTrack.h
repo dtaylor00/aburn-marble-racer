@@ -33,6 +33,9 @@ class GuiMenuTrack : public GuiMenuAbstract {
     virtual void convertAngles(Axis first, Axis second, Axis third);
     virtual void addTrack(IFaceWOTrack *track);
 
+    virtual void spawnTrack(int id, Mat4 pose, Vector scale);
+    virtual void spawnTrack(IFaceWOTrack *iface, Mat4 pose, Vector scale);
+
    protected:
     virtual void onCreate();
     GuiMenuTrack();
