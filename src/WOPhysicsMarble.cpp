@@ -2,6 +2,7 @@
 
 #include "ManagerMarble.h"
 #include "ManagerPhysics.h"
+#include "Model.h"
 #include "PxPhysicsAPI.h"
 
 using namespace Aftr;
@@ -21,7 +22,12 @@ WOPhysicsMarble *WOPhysicsMarble::New(Vector scale, MESH_SHADING_TYPE shadingTyp
 }
 
 void WOPhysicsMarble::onCreate(Vector scale, MESH_SHADING_TYPE shadingType) {
-    WO::onCreate(marble, scale);
+    WO::onCreate(marble, scale, shadingType);
+
+    this->upon_async_model_loaded([this] {
+        Tex tex = ManagerMarble::getRandomTexture();
+        this->getModel()->getSkin().getMultiTextureSet().at(0) = tex;
+    });
 
     PxPhysics *px = ManagerPhysics::getPhysics();
     PxScene *scene = ManagerPhysics::getScene();
