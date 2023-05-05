@@ -3,6 +3,8 @@ Simulate multiple marbles racing down a track towards a finish line. You can bui
 
 Made by Dakota Taylor for CS4560 (Fundamentals of Game Engine Design) Final Project
 
+Link to Youtube demo: https://youtu.be/Fo_wgziZeJ0
+
 ## Core Features
 * Start and pause simulation
 * Spawn or remove marbles
